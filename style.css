@@ -87,13 +87,13 @@ body{
   z-index:2;
 
   width:100%;
-  max-width:430px;
+
+  max-width:500px;
 
   padding:20px;
 
   text-align:center;
 }
-
 .hero{
 
   display:flex;
