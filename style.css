@@ -10,16 +10,14 @@ body{
 
   min-height:100vh;
 
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  overflow:hidden;
-
   background:black;
 
   color:white;
+
+  overflow-x:hidden;
 }
+
+/* BACKGROUND */
 
 .background{
 
@@ -30,13 +28,13 @@ body{
 
   radial-gradient(
   circle at left,
-  rgba(59,130,246,0.35),
+  rgba(59,130,246,0.25),
   transparent 40%
   ),
 
   radial-gradient(
   circle at right,
-  rgba(249,115,22,0.35),
+  rgba(249,115,22,0.25),
   transparent 40%
   ),
 
@@ -51,6 +49,8 @@ body{
   filter:blur(10px);
 
   animation:bgMove 10s ease infinite;
+
+  z-index:-2;
 }
 
 @keyframes bgMove{
@@ -60,7 +60,7 @@ body{
   }
 
   50%{
-    transform:scale(1.05);
+    transform:scale(1.04);
   }
 
   100%{
@@ -75,25 +75,61 @@ body{
   inset:0;
 
   background:
-  rgba(0,0,0,0.45);
+  rgba(0,0,0,0.35);
 
-  backdrop-filter:blur(5px);
+  backdrop-filter:blur(6px);
+
+  z-index:-1;
 }
+
+/* CONTAINER */
 
 .container{
 
-  position:relative;
+  width:100%;
 
-  z-index:2;
+  max-width:1200px;
+
+  margin:auto;
+
+  min-height:100vh;
+
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  padding:30px;
+}
+
+/* GAME PANEL */
+
+.game-panel{
 
   width:100%;
 
-  max-width:500px;
+  max-width:450px;
 
-  padding:20px;
+  background:
+  rgba(255,255,255,0.04);
 
-  text-align:center;
+  border:
+
+  1px solid
+  rgba(255,255,255,0.08);
+
+  backdrop-filter:blur(12px);
+
+  border-radius:30px;
+
+  padding:25px;
+
+  box-shadow:
+  0 0 40px rgba(0,0,0,0.6);
 }
+
+/* HERO */
+
 .hero{
 
   display:flex;
@@ -102,48 +138,36 @@ body{
 
   align-items:center;
 
-  gap:20px;
-
   margin-bottom:25px;
-
-  flex-wrap:wrap;
 }
 
 .hero h1{
 
-  font-size:clamp(2.5rem, 8vw, 4.5rem);
+  font-size:4rem;
 
   font-weight:900;
-
-  letter-spacing:2px;
 }
 
 .hero p{
 
-  margin-top:5px;
+  margin-top:6px;
 
-  font-size:clamp(
-    0.7rem,
-    2vw,
-    1rem
-  );
+  font-size:0.9rem;
 
   opacity:0.8;
 }
 
 .vs{
 
-  font-size:clamp(
-    1.5rem,
-    5vw,
-    2.5rem
-  );
+  font-size:2rem;
 
   font-weight:bold;
 
   text-shadow:
-  0 0 20px white;
+  0 0 15px white;
 }
+
+/* STATUS */
 
 .status{
 
@@ -153,18 +177,20 @@ body{
 
   border-radius:20px;
 
+  text-align:center;
+
   font-size:1.3rem;
+
   font-weight:bold;
 
-  background:rgba(255,255,255,0.05);
+  background:
+  rgba(255,255,255,0.05);
 
-  border:1px solid rgba(255,255,255,0.08);
-
-  backdrop-filter:blur(12px);
-
-  box-shadow:
-  0 0 25px rgba(0,0,0,0.5);
+  border:
+  1px solid rgba(255,255,255,0.08);
 }
+
+/* BOARD */
 
 .board{
 
@@ -177,54 +203,44 @@ body{
 
   gap:12px;
 
-  width:100%;
-
-  max-width:420px;
-
-  margin:0 auto 20px;
+  margin-bottom:20px;
 }
 
 .cell{
 
   aspect-ratio:1/1;
 
-  width:100%;
+  border-radius:22px;
 
   background:
   rgba(255,255,255,0.05);
 
-  border-radius:22px;
+  border:
+  2px solid rgba(255,255,255,0.08);
 
   display:flex;
+
   justify-content:center;
   align-items:center;
 
-  font-size:clamp(
-    1.5rem,
-    5vw,
-    2.2rem
-  );
+  font-size:2rem;
 
   font-weight:bold;
 
   cursor:pointer;
 
   transition:0.3s;
-
-  border:2px solid
-  rgba(255,255,255,0.08);
-
-  backdrop-filter:blur(8px);
-
-  user-select:none;
 }
 
 .cell:hover{
 
-  transform:scale(1.05);
+  transform:scale(1.04);
 
-  background:rgba(255,255,255,0.08);
+  background:
+  rgba(255,255,255,0.08);
 }
+
+/* COLORS */
 
 .kh{
 
@@ -244,6 +260,8 @@ body{
   0 0 25px #f97316;
 }
 
+/* BUTTON */
+
 button{
 
   width:100%;
@@ -254,62 +272,61 @@ button{
 
   border-radius:20px;
 
-  background:linear-gradient(
-    90deg,
-    #312e81,
-    #7c3aed,
-    #db2777
-  );
-
-  color:white;
-
-  font-size:1rem;
-  font-weight:bold;
-
-  letter-spacing:1px;
-
   cursor:pointer;
 
   margin-bottom:20px;
 
-  transition:0.3s;
+  color:white;
+
+  font-size:1rem;
+
+  font-weight:bold;
+
+  background:
+
+  linear-gradient(
+  90deg,
+  #4338ca,
+  #9333ea,
+  #db2777
+  );
 
   box-shadow:
-  0 0 25px rgba(124,58,237,0.5);
+  0 0 25px rgba(147,51,234,0.5);
+
+  transition:0.3s;
 }
 
 button:hover{
 
-  transform:scale(1.03);
+  transform:scale(1.02);
 }
+
+/* DASHBOARD */
 
 .dashboard{
 
   display:grid;
 
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:
+  repeat(3,1fr);
 
   gap:12px;
 }
 
 .card{
 
-  background:rgba(255,255,255,0.05);
-
-  border-radius:20px;
-
   padding:15px;
 
-  border:1px solid rgba(255,255,255,0.08);
+  border-radius:18px;
 
-  backdrop-filter:blur(10px);
+  text-align:center;
 
-  transition:0.3s;
-}
+  background:
+  rgba(255,255,255,0.05);
 
-.card:hover{
-
-  transform:translateY(-3px);
+  border:
+  1px solid rgba(255,255,255,0.08);
 }
 
 .card h3{
@@ -317,12 +334,7 @@ button:hover{
   margin-bottom:8px;
 }
 
-.card p{
-
-  font-size:0.8rem;
-
-  opacity:0.8;
-}
+/* STRIKE */
 
 .strike{
 
@@ -341,6 +353,8 @@ button:hover{
   0 0 30px white;
 }
 
+/* WINNER */
+
 .winner{
 
   animation:winnerGlow 0.8s infinite alternate;
@@ -358,37 +372,100 @@ button:hover{
 
 }
 
+/* ========================= */
+/* MOBILE VERSION */
+/* ========================= */
+
 @media(max-width:768px){
+
+  body{
+
+    overflow-y:auto;
+  }
 
   .container{
 
     padding:15px;
+
+    display:block;
+  }
+
+  .game-panel{
+
+    max-width:100%;
+
+    min-height:auto;
+
+    border-radius:0;
+
+    padding:18px;
+
+    background:transparent;
+
+    border:none;
+
+    box-shadow:none;
+  }
+
+  .hero h1{
+
+    font-size:3.5rem;
+  }
+
+  .hero p{
+
+    font-size:0.8rem;
+  }
+
+  .vs{
+
+    font-size:2rem;
+  }
+
+  .cell{
+
+    font-size:1.8rem;
   }
 
   .dashboard{
 
-    grid-template-columns:1fr;
-  }
+    grid-template-columns:
+    repeat(3,1fr);
 
-  .hero{
-
-    justify-content:center;
+    gap:10px;
   }
 
 }
+
+/* EXTRA SMALL */
 
 @media(max-width:480px){
 
   .hero{
 
-    gap:10px;
+    margin-bottom:20px;
+  }
+
+  .hero h1{
+
+    font-size:3rem;
+  }
+
+  .vs{
+
+    font-size:1.8rem;
   }
 
   .status{
 
-    font-size:1rem;
+    font-size:1.1rem;
+  }
 
-    padding:14px;
+  .cell{
+
+    font-size:1.6rem;
+
+    border-radius:18px;
   }
 
   button{
@@ -399,6 +476,11 @@ button:hover{
   .card{
 
     padding:12px;
+  }
+
+  .card p{
+
+    font-size:0.75rem;
   }
 
 }
