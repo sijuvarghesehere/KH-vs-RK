@@ -97,15 +97,21 @@ body{
 .hero{
 
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
 
+  gap:20px;
+
   margin-bottom:25px;
+
+  flex-wrap:wrap;
 }
 
 .hero h1{
 
-  font-size:4rem;
+  font-size:clamp(2.5rem, 8vw, 4.5rem);
 
   font-weight:900;
 
@@ -116,14 +122,23 @@ body{
 
   margin-top:5px;
 
-  font-size:0.9rem;
+  font-size:clamp(
+    0.7rem,
+    2vw,
+    1rem
+  );
 
   opacity:0.8;
 }
 
 .vs{
 
-  font-size:2rem;
+  font-size:clamp(
+    1.5rem,
+    5vw,
+    2.5rem
+  );
+
   font-weight:bold;
 
   text-shadow:
@@ -157,18 +172,26 @@ body{
 
   display:grid;
 
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:
+  repeat(3,1fr);
 
   gap:12px;
 
-  margin-bottom:20px;
+  width:100%;
+
+  max-width:420px;
+
+  margin:0 auto 20px;
 }
 
 .cell{
 
   aspect-ratio:1/1;
 
-  background:rgba(255,255,255,0.05);
+  width:100%;
+
+  background:
+  rgba(255,255,255,0.05);
 
   border-radius:22px;
 
@@ -176,14 +199,20 @@ body{
   justify-content:center;
   align-items:center;
 
-  font-size:2rem;
+  font-size:clamp(
+    1.5rem,
+    5vw,
+    2.2rem
+  );
+
   font-weight:bold;
 
   cursor:pointer;
 
   transition:0.3s;
 
-  border:2px solid rgba(255,255,255,0.08);
+  border:2px solid
+  rgba(255,255,255,0.08);
 
   backdrop-filter:blur(8px);
 
@@ -329,16 +358,47 @@ button:hover{
 
 }
 
-@media(max-width:500px){
+@media(max-width:768px){
 
-  .hero h1{
+  .container{
 
-    font-size:3rem;
+    padding:15px;
   }
 
-  .cell{
+  .dashboard{
 
-    font-size:1.7rem;
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+
+    justify-content:center;
+  }
+
+}
+
+@media(max-width:480px){
+
+  .hero{
+
+    gap:10px;
+  }
+
+  .status{
+
+    font-size:1rem;
+
+    padding:14px;
+  }
+
+  button{
+
+    padding:14px;
+  }
+
+  .card{
+
+    padding:12px;
   }
 
 }
