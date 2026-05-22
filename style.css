@@ -1,3 +1,5 @@
+/* RESET */
+
 *{
   margin:0;
   padding:0;
@@ -37,14 +39,17 @@ body{
   background-size:110% auto;
 
   background-position:center;
+
   background-attachment:fixed;
 
-filter:
-brightness(1.1)
-contrast(1.08);
+  filter:
+  brightness(1.1)
+  contrast(1.08);
 
   z-index:-2;
 }
+
+/* OVERLAY */
 
 .overlay{
 
@@ -53,15 +58,16 @@ contrast(1.08);
   inset:0;
 
   background:
+
   radial-gradient(
   circle at left,
-  rgba(59,130,246,0.18),
+  rgba(59,130,246,0.16),
   transparent 40%
   ),
 
   radial-gradient(
   circle at right,
-  rgba(249,115,22,0.18),
+  rgba(249,115,22,0.16),
   transparent 40%
   );
 
@@ -79,9 +85,10 @@ contrast(1.08);
   display:flex;
 
   justify-content:center;
+
   align-items:center;
 
-  padding:30px;
+  padding:12px;
 }
 
 /* GAME PANEL */
@@ -91,6 +98,10 @@ contrast(1.08);
   width:100%;
 
   max-width:460px;
+
+  display:flex;
+
+  flex-direction:column;
 
   background:
   rgba(0,0,0,0.15);
@@ -102,7 +113,7 @@ contrast(1.08);
 
   border-radius:30px;
 
-  padding:25px;
+  padding:18px;
 
   box-shadow:
   0 0 40px rgba(0,0,0,0.6);
@@ -118,7 +129,7 @@ contrast(1.08);
 
   align-items:center;
 
-  margin-bottom:25px;
+  margin-bottom:18px;
 }
 
 .hero-box{
@@ -139,7 +150,7 @@ contrast(1.08);
 
   font-size:0.9rem;
 
-  opacity:0.8;
+  opacity:0.85;
 }
 
 .vs{
@@ -176,7 +187,7 @@ contrast(1.08);
 
 .status{
 
-  margin-bottom:20px;
+  margin-bottom:14px;
 
   padding:16px;
 
@@ -189,10 +200,12 @@ contrast(1.08);
   font-weight:bold;
 
   background:
-  rgba(255,255,255,0.05);
+  rgba(0,0,0,0.28);
 
   border:
   1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter:blur(6px);
 }
 
 /* BOARD */
@@ -201,15 +214,19 @@ contrast(1.08);
 
   position:relative;
 
+  width:100%;
+
   display:grid;
 
   grid-template-columns:
   repeat(3,1fr);
 
-  gap:12px;
+  gap:10px;
 
-  margin-bottom:20px;
+  margin-bottom:16px;
 }
+
+/* CELLS */
 
 .cell{
 
@@ -226,6 +243,7 @@ contrast(1.08);
   display:flex;
 
   justify-content:center;
+
   align-items:center;
 
   font-size:2rem;
@@ -235,11 +253,15 @@ contrast(1.08);
   cursor:pointer;
 
   transition:0.3s;
+
+  box-shadow:
+  inset 0 0 15px rgba(255,255,255,0.05),
+  0 0 10px rgba(255,255,255,0.04);
 }
 
 .cell:hover{
 
-  transform:scale(1.04);
+  transform:scale(1.03);
 
   background:
   rgba(255,255,255,0.08);
@@ -274,17 +296,19 @@ button{
 
   border:none;
 
-  border-radius:20px;
+  border-radius:22px;
 
   cursor:pointer;
 
-  margin-bottom:20px;
+  margin-bottom:14px;
 
   color:white;
 
   font-size:1rem;
 
   font-weight:bold;
+
+  letter-spacing:1px;
 
   background:
 
@@ -303,10 +327,10 @@ button{
 
 button:hover{
 
-  transform:scale(1.03);
+  transform:scale(1.02);
 }
 
-/* SCOREBOARD */
+/* DASHBOARD */
 
 .dashboard{
 
@@ -315,22 +339,28 @@ button:hover{
   grid-template-columns:
   repeat(3,1fr);
 
-  gap:12px;
+  gap:8px;
+
+  margin-top:5px;
 }
+
+/* CARDS */
 
 .card{
 
-  padding:15px;
+  padding:14px;
 
-  border-radius:18px;
+  border-radius:20px;
 
   text-align:center;
 
   background:
-  rgba(255,255,255,0.05);
+  rgba(0,0,0,0.35);
 
   border:
   1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter:blur(6px);
 }
 
 .card h3{
@@ -340,9 +370,11 @@ button:hover{
 
 .card p{
 
-  font-size:0.8rem;
+  font-size:0.76rem;
 
   opacity:0.8;
+
+  line-height:1.2;
 }
 
 .card span{
@@ -351,7 +383,7 @@ button:hover{
 
   margin-top:10px;
 
-  font-size:2rem;
+  font-size:2.4rem;
 
   font-weight:bold;
 }
@@ -375,24 +407,13 @@ button:hover{
 
 }
 
-/* MOBILE */
+/* TABLET */
 
 @media(max-width:768px){
 
   .container{
 
-    padding:15px;
-
     align-items:flex-start;
-  }
-
-  .game-panel{
-
-    max-width:100%;
-
-    padding:18px;
-
-    border-radius:22px;
   }
 
   .hero h1{
@@ -402,22 +423,31 @@ button:hover{
 
   .hero p{
 
-    font-size:0.8rem;
+    font-size:0.82rem;
   }
 
   .vs{
 
-    font-size:1.6rem;
+    font-size:1.7rem;
   }
 
   .cell{
 
-    font-size:1.6rem;
+    font-size:1.7rem;
   }
 
 }
 
+/* MOBILE */
+
 @media(max-width:480px){
+
+  .game-panel{
+
+    padding:16px;
+
+    border-radius:24px;
+  }
 
   .hero{
 
@@ -426,7 +456,7 @@ button:hover{
 
   .hero h1{
 
-    font-size:2.5rem;
+    font-size:2.9rem;
   }
 
   .vs{
@@ -437,6 +467,8 @@ button:hover{
   .status{
 
     font-size:1rem;
+
+    padding:14px;
   }
 
   .cell{
@@ -448,7 +480,9 @@ button:hover{
 
   button{
 
-    padding:14px;
+    padding:15px;
+
+    font-size:0.95rem;
   }
 
   .card{
@@ -459,6 +493,11 @@ button:hover{
   .card p{
 
     font-size:0.72rem;
+  }
+
+  .card span{
+
+    font-size:2.2rem;
   }
 
 }
