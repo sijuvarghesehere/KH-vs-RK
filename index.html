@@ -3,184 +3,213 @@
 
 <head>
 
-<meta charset="UTF-8">
+  <meta charset="UTF-8" />
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0"/>
 
-<meta name="theme-color"
-      content="#000000">
+  <title>KH vs RK</title>
 
-<title>KH vs RK</title>
+  <!-- PWA -->
 
-<link rel="manifest"
-      href="manifest.json">
+  <meta name="theme-color" content="#000000"/>
 
-<link rel="stylesheet"
-      href="style.css">
+  <link rel="manifest" href="manifest.json"/>
 
-<script src="script.js"
-        defer></script>
+  <link rel="icon" href="icon.png"/>
+
+  <!-- CSS -->
+
+  <link rel="stylesheet" href="style.css"/>
 
 </head>
 
 <body>
 
-<div class="background"></div>
+  <!-- BACKGROUND -->
 
-<div class="overlay"></div>
+  <div class="background"></div>
 
-<div class="container">
+  <div class="overlay"></div>
 
-<div class="game-panel">
+  <!-- MAIN CONTAINER -->
 
-<!-- HERO -->
+  <div class="container">
 
-<div class="hero">
+    <!-- GAME PANEL -->
 
-<div class="hero-box">
+    <div class="game-panel">
 
-<h1 class="kh">
-KH
-</h1>
+      <!-- TOP HERO -->
 
-<p>
-Kamal Haasan
-</p>
+      <div class="hero">
 
-</div>
+        <!-- KH -->
 
-<div class="vs">
-VS
-</div>
+        <div class="hero-box">
 
-<div class="hero-box">
+          <h1 class="kh">
+            KH
+          </h1>
 
-<h1 class="rk">
-RK
-</h1>
+          <p>
+            Kamal Haasan
+          </p>
 
-<p>
-Rajinikanth
-</p>
+        </div>
 
-</div>
+        <!-- VS -->
 
-</div>
+        <div class="vs">
+          VS
+        </div>
 
-<!-- STATUS -->
+        <!-- RK -->
 
-<div class="status"
-     id="status">
+        <div class="hero-box">
 
-<span class="kh">
-KH Turn
-</span>
+          <h1 class="rk">
+            RK
+          </h1>
 
-</div>
+          <p>
+            Rajinikanth
+          </p>
 
-<!-- BOARD -->
+        </div>
 
-<div class="board"
-     id="board">
+      </div>
 
-<div class="strike"
-     id="strike"></div>
+      <!-- STATUS -->
 
-<div class="cell"
-     data-index="0"></div>
+      <div class="status"
+           id="status">
 
-<div class="cell"
-     data-index="1"></div>
+        KH Turn
 
-<div class="cell"
-     data-index="2"></div>
+      </div>
 
-<div class="cell"
-     data-index="3"></div>
+      <!-- GAME BOARD -->
 
-<div class="cell"
-     data-index="4"></div>
+      <div class="board"
+           id="board">
 
-<div class="cell"
-     data-index="5"></div>
+        <!-- ROW 1 -->
 
-<div class="cell"
-     data-index="6"></div>
+        <div class="cell"
+             data-index="0"></div>
 
-<div class="cell"
-     data-index="7"></div>
+        <div class="cell"
+             data-index="1"></div>
 
-<div class="cell"
-     data-index="8"></div>
+        <div class="cell"
+             data-index="2"></div>
 
-</div>
+        <!-- ROW 2 -->
 
-<!-- BUTTON -->
+        <div class="cell"
+             data-index="3"></div>
 
-<button id="restartBtn">
+        <div class="cell"
+             data-index="4"></div>
 
-RESTART GAME
+        <div class="cell"
+             data-index="5"></div>
 
-</button>
+        <!-- ROW 3 -->
 
-<!-- SCOREBOARD -->
+        <div class="cell"
+             data-index="6"></div>
 
-<div class="dashboard">
+        <div class="cell"
+             data-index="7"></div>
 
-<div class="card">
+        <div class="cell"
+             data-index="8"></div>
 
-<h3 class="kh">
-KH
-</h3>
+        <!-- STRIKE LINE -->
 
-<p>
-Legend Mode
-</p>
+        <div class="strike"
+             id="strike"></div>
 
-<span id="khScore">
-0
-</span>
+      </div>
 
-</div>
+      <!-- RESTART BUTTON -->
 
-<div class="card">
+      <button id="restartBtn">
 
-<h3>
-DRAW
-</h3>
+        RESTART GAME
 
-<p>
-Cinematic Battle
-</p>
+      </button>
 
-<span id="drawScore">
-0
-</span>
+      <!-- DASHBOARD -->
 
-</div>
+      <div class="dashboard">
 
-<div class="card">
+        <!-- KH SCORE -->
 
-<h3 class="rk">
-RK
-</h3>
+        <div class="card">
 
-<p>
-Superstar Mode
-</p>
+          <h3 class="kh">
+            KH
+          </h3>
 
-<span id="rkScore">
-0
-</span>
+          <p>
+            Legend Mode
+          </p>
 
-</div>
+          <span id="khScore">
+            0
+          </span>
 
-</div>
+        </div>
 
-</div>
+        <!-- DRAW -->
 
-</div>
+        <div class="card">
+
+          <h3>
+            DRAW
+          </h3>
+
+          <p>
+            Cinematic Battle
+          </p>
+
+          <span id="drawScore">
+            0
+          </span>
+
+        </div>
+
+        <!-- RK SCORE -->
+
+        <div class="card">
+
+          <h3 class="rk">
+            RK
+          </h3>
+
+          <p>
+            Superstar Mode
+          </p>
+
+          <span id="rkScore">
+            0
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- JAVASCRIPT -->
+
+  <script src="script.js"></script>
 
 </body>
+
 </html>
