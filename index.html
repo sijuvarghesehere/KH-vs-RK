@@ -3,24 +3,24 @@
 
 <head>
 
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
 
   <meta name="viewport"
-        content="width=device-width, initial-scale=1.0"/>
+        content="width=device-width, initial-scale=1.0">
 
   <title>KH vs RK</title>
 
-  <!-- PWA -->
+  <meta name="theme-color"
+        content="#000000">
 
-  <meta name="theme-color" content="#000000"/>
+  <link rel="icon"
+        href="icon.png">
 
-  <link rel="manifest" href="manifest.json"/>
+  <link rel="manifest"
+        href="manifest.json">
 
-  <link rel="icon" href="icon.png"/>
-
-  <!-- CSS -->
-
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet"
+        href="style.css">
 
 </head>
 
@@ -32,19 +32,15 @@
 
   <div class="overlay"></div>
 
-  <!-- MAIN CONTAINER -->
+  <!-- MAIN -->
 
-  <div class="container">
+  <main class="container">
 
-    <!-- GAME PANEL -->
+    <section class="game-panel">
 
-    <div class="game-panel">
-
-      <!-- TOP HERO -->
+      <!-- HERO -->
 
       <div class="hero">
-
-        <!-- KH -->
 
         <div class="hero-box">
 
@@ -58,13 +54,9 @@
 
         </div>
 
-        <!-- VS -->
-
         <div class="vs">
           VS
         </div>
-
-        <!-- RK -->
 
         <div class="hero-box">
 
@@ -89,12 +81,10 @@
 
       </div>
 
-      <!-- GAME BOARD -->
+      <!-- BOARD -->
 
       <div class="board"
            id="board">
-
-        <!-- ROW 1 -->
 
         <div class="cell"
              data-index="0"></div>
@@ -105,8 +95,6 @@
         <div class="cell"
              data-index="2"></div>
 
-        <!-- ROW 2 -->
-
         <div class="cell"
              data-index="3"></div>
 
@@ -115,8 +103,6 @@
 
         <div class="cell"
              data-index="5"></div>
-
-        <!-- ROW 3 -->
 
         <div class="cell"
              data-index="6"></div>
@@ -127,14 +113,14 @@
         <div class="cell"
              data-index="8"></div>
 
-        <!-- STRIKE LINE -->
+        <!-- STRIKE -->
 
         <div class="strike"
              id="strike"></div>
 
       </div>
 
-      <!-- RESTART BUTTON -->
+      <!-- BUTTON -->
 
       <button id="restartBtn">
 
@@ -145,8 +131,6 @@
       <!-- DASHBOARD -->
 
       <div class="dashboard">
-
-        <!-- KH SCORE -->
 
         <div class="card">
 
@@ -164,8 +148,6 @@
 
         </div>
 
-        <!-- DRAW -->
-
         <div class="card">
 
           <h3>
@@ -181,8 +163,6 @@
           </span>
 
         </div>
-
-        <!-- RK SCORE -->
 
         <div class="card">
 
@@ -202,11 +182,9 @@
 
       </div>
 
-    </div>
+    </section>
 
-  </div>
-
-  <!-- JAVASCRIPT -->
+  </main>
 
   <script src="script.js"></script>
 
