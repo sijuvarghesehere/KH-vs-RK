@@ -10,9 +10,33 @@ document.getElementById("restartBtn");
 const strike =
 document.getElementById("strike");
 
+const khScoreText =
+document.getElementById("khScore");
+
+const rkScoreText =
+document.getElementById("rkScore");
+
+const drawScoreText =
+document.getElementById("drawScore");
+
 let currentPlayer = "KH";
 
 let gameActive = true;
+
+let khScore =
+localStorage.getItem("khScore") || 0;
+
+let rkScore =
+localStorage.getItem("rkScore") || 0;
+
+let drawScore =
+localStorage.getItem("drawScore") || 0;
+
+khScoreText.textContent = khScore;
+
+rkScoreText.textContent = rkScore;
+
+drawScoreText.textContent = drawScore;
 
 let gameState = [
 
@@ -75,9 +99,11 @@ clickedCell.textContent =
 currentPlayer;
 
 clickedCell.classList.add(
+
 currentPlayer === "KH"
 ? "kh"
 : "rk"
+
 );
 
 checkWinner();
@@ -125,9 +151,38 @@ cells[index]
 
 });
 
+if(currentPlayer === "KH"){
+
+khScore++;
+
+localStorage.setItem(
+"khScore",
+khScore
+);
+
+khScoreText.textContent =
+khScore;
+
+}else{
+
+rkScore++;
+
+localStorage.setItem(
+"rkScore",
+rkScore
+);
+
+rkScoreText.textContent =
+rkScore;
+
+}
+
 statusText.innerHTML =
+
 currentPlayer === "KH"
+
 ? "<span class='kh'>KH Wins 👑</span>"
+
 : "<span class='rk'>RK Wins 👑</span>";
 
 navigator.vibrate([100,50,100]);
@@ -141,6 +196,16 @@ const draw =
 
 if(draw){
 
+drawScore++;
+
+localStorage.setItem(
+"drawScore",
+drawScore
+);
+
+drawScoreText.textContent =
+drawScore;
+
 statusText.innerHTML =
 "🤝 Draw Match";
 
@@ -150,13 +215,17 @@ return;
 }
 
 currentPlayer =
+
 currentPlayer === "KH"
 ? "RK"
 : "KH";
 
 statusText.innerHTML =
+
 currentPlayer === "KH"
+
 ? "<span class='kh'>KH Turn</span>"
+
 : "<span class='rk'>RK Turn</span>";
 }
 
