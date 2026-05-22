@@ -10,11 +10,11 @@ body{
 
   min-height:100vh;
 
-  background:black;
-
   color:white;
 
   overflow-x:hidden;
+
+  background:black;
 }
 
 /* BACKGROUND */
@@ -22,62 +22,43 @@ body{
 .background{
 
   position:fixed;
+
   inset:0;
 
   background:
 
-  radial-gradient(
-  circle at left,
-  rgba(59,130,246,0.25),
-  transparent 40%
-  ),
-
-  radial-gradient(
-  circle at right,
-  rgba(249,115,22,0.25),
-  transparent 40%
-  ),
-
   linear-gradient(
-  135deg,
-  #020617,
-  #0f172a,
-  #111827,
-  #1e1b4b
-  );
+  rgba(0,0,0,0.75),
+  rgba(0,0,0,0.85)
+  ),
 
-  filter:blur(10px);
+  url("bg.png");
 
-  animation:bgMove 10s ease infinite;
+  background-size:cover;
+
+  background-position:center;
 
   z-index:-2;
-}
-
-@keyframes bgMove{
-
-  0%{
-    transform:scale(1);
-  }
-
-  50%{
-    transform:scale(1.04);
-  }
-
-  100%{
-    transform:scale(1);
-  }
-
 }
 
 .overlay{
 
   position:fixed;
+
   inset:0;
 
   background:
-  rgba(0,0,0,0.35);
+  radial-gradient(
+  circle at left,
+  rgba(59,130,246,0.18),
+  transparent 40%
+  ),
 
-  backdrop-filter:blur(6px);
+  radial-gradient(
+  circle at right,
+  rgba(249,115,22,0.18),
+  transparent 40%
+  );
 
   z-index:-1;
 }
@@ -104,15 +85,15 @@ body{
 
   width:100%;
 
-  max-width:450px;
+  max-width:460px;
 
   background:
-  rgba(255,255,255,0.04);
+  rgba(0,0,0,0.35);
 
   border:
   1px solid rgba(255,255,255,0.08);
 
-  backdrop-filter:blur(12px);
+  backdrop-filter:blur(10px);
 
   border-radius:30px;
 
@@ -149,7 +130,7 @@ body{
 
 .hero p{
 
-  margin-top:6px;
+  margin-top:5px;
 
   font-size:0.9rem;
 
@@ -166,6 +147,26 @@ body{
   0 0 15px white;
 }
 
+/* COLORS */
+
+.kh{
+
+  color:#3b82f6;
+
+  text-shadow:
+  0 0 10px #3b82f6,
+  0 0 25px #3b82f6;
+}
+
+.rk{
+
+  color:#f97316;
+
+  text-shadow:
+  0 0 10px #f97316,
+  0 0 25px #f97316;
+}
+
 /* STATUS */
 
 .status{
@@ -178,7 +179,7 @@ body{
 
   text-align:center;
 
-  font-size:1.3rem;
+  font-size:1.2rem;
 
   font-weight:bold;
 
@@ -239,24 +240,23 @@ body{
   rgba(255,255,255,0.08);
 }
 
-/* COLORS */
+/* STRIKE */
 
-.kh{
+.strike{
 
-  color:#3b82f6;
+  position:absolute;
 
-  text-shadow:
-  0 0 10px #3b82f6,
-  0 0 25px #3b82f6;
-}
+  background:white;
 
-.rk{
+  border-radius:10px;
 
-  color:#f97316;
+  display:none;
 
-  text-shadow:
-  0 0 10px #f97316,
-  0 0 25px #f97316;
+  z-index:10;
+
+  box-shadow:
+  0 0 15px white,
+  0 0 30px white;
 }
 
 /* BUTTON */
@@ -298,10 +298,10 @@ button{
 
 button:hover{
 
-  transform:scale(1.02);
+  transform:scale(1.03);
 }
 
-/* DASHBOARD */
+/* SCOREBOARD */
 
 .dashboard{
 
@@ -330,26 +330,25 @@ button:hover{
 
 .card h3{
 
-  margin-bottom:8px;
+  margin-bottom:6px;
 }
 
-/* STRIKE */
+.card p{
 
-.strike{
+  font-size:0.8rem;
 
-  position:absolute;
+  opacity:0.8;
+}
 
-  background:white;
+.card span{
 
-  border-radius:10px;
+  display:block;
 
-  display:none;
+  margin-top:10px;
 
-  z-index:10;
+  font-size:2rem;
 
-  box-shadow:
-  0 0 15px white,
-  0 0 30px white;
+  font-weight:bold;
 }
 
 /* WINNER */
@@ -388,7 +387,7 @@ button:hover{
 
     padding:18px;
 
-    border-radius:20px;
+    border-radius:22px;
   }
 
   .hero h1{
@@ -403,17 +402,15 @@ button:hover{
 
   .vs{
 
-    font-size:1.7rem;
+    font-size:1.6rem;
   }
 
   .cell{
 
-    font-size:1.7rem;
+    font-size:1.6rem;
   }
 
 }
-
-/* EXTRA SMALL */
 
 @media(max-width:480px){
 
@@ -424,7 +421,7 @@ button:hover{
 
   .hero h1{
 
-    font-size:2.6rem;
+    font-size:2.5rem;
   }
 
   .vs{
@@ -449,11 +446,6 @@ button:hover{
     padding:14px;
   }
 
-  .dashboard{
-
-    gap:10px;
-  }
-
   .card{
 
     padding:12px;
@@ -461,7 +453,7 @@ button:hover{
 
   .card p{
 
-    font-size:0.75rem;
+    font-size:0.72rem;
   }
 
 }
