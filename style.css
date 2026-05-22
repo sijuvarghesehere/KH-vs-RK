@@ -4,19 +4,21 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-
-  font-family:Arial,sans-serif;
 }
 
 body{
 
-  min-height:100vh;
+  font-family:Arial,sans-serif;
+
+  background:black;
 
   color:white;
 
+  min-height:100vh;
+
   overflow-x:hidden;
 
-  background:black;
+  position:relative;
 }
 
 /* BACKGROUND */
@@ -27,29 +29,22 @@ body{
 
   inset:0;
 
-  background:
+  background-image:url("bg.png");
 
-  linear-gradient(
-  rgba(0,0,0,0.45),
-  rgba(0,0,0,0.60)
-  ),
-
-  url("bg.png");
-
-  background-size:110% auto;
+  background-size:cover;
 
   background-position:center;
 
-  background-attachment:fixed;
+  background-repeat:no-repeat;
 
   filter:
-  brightness(1.1)
-  contrast(1.08);
+  brightness(0.5)
+  contrast(1.1);
 
-  z-index:-2;
+  z-index:-3;
 }
 
-/* OVERLAY */
+/* DARK OVERLAY */
 
 .overlay{
 
@@ -59,19 +54,12 @@ body{
 
   background:
 
-  radial-gradient(
-  circle at left,
-  rgba(59,130,246,0.16),
-  transparent 40%
-  ),
-
-  radial-gradient(
-  circle at right,
-  rgba(249,115,22,0.16),
-  transparent 40%
+  linear-gradient(
+  rgba(0,0,0,0.55),
+  rgba(0,0,0,0.7)
   );
 
-  z-index:-1;
+  z-index:-2;
 }
 
 /* CONTAINER */
@@ -88,7 +76,7 @@ body{
 
   align-items:center;
 
-  padding:12px;
+  padding:14px;
 }
 
 /* GAME PANEL */
@@ -99,17 +87,13 @@ body{
 
   max-width:460px;
 
-  display:flex;
-
-  flex-direction:column;
-
   background:
-  rgba(0,0,0,0.15);
+  rgba(0,0,0,0.18);
 
   border:
-  1px solid rgba(255,255,255,0.08);
+  1px solid rgba(255,255,255,0.06);
 
-  backdrop-filter:blur(10px);
+  backdrop-filter:blur(12px);
 
   border-radius:30px;
 
@@ -129,10 +113,14 @@ body{
 
   align-items:center;
 
+  gap:10px;
+
   margin-bottom:18px;
 }
 
 .hero-box{
+
+  flex:1;
 
   text-align:center;
 }
@@ -148,9 +136,9 @@ body{
 
   margin-top:5px;
 
-  font-size:0.9rem;
+  font-size:0.95rem;
 
-  opacity:0.85;
+  opacity:0.9;
 }
 
 .vs{
@@ -160,7 +148,7 @@ body{
   font-weight:bold;
 
   text-shadow:
-  0 0 15px white;
+  0 0 12px white;
 }
 
 /* COLORS */
@@ -170,7 +158,7 @@ body{
   color:#3b82f6;
 
   text-shadow:
-  0 0 10px #3b82f6,
+  0 0 12px #3b82f6,
   0 0 25px #3b82f6;
 }
 
@@ -179,7 +167,7 @@ body{
   color:#f97316;
 
   text-shadow:
-  0 0 10px #f97316,
+  0 0 12px #f97316,
   0 0 25px #f97316;
 }
 
@@ -187,25 +175,27 @@ body{
 
 .status{
 
-  margin-bottom:14px;
+  width:100%;
 
   padding:16px;
 
-  border-radius:20px;
+  margin-bottom:16px;
+
+  border-radius:22px;
 
   text-align:center;
 
-  font-size:1.2rem;
+  font-size:1.3rem;
 
   font-weight:bold;
 
   background:
-  rgba(0,0,0,0.28);
+  rgba(255,255,255,0.04);
 
   border:
   1px solid rgba(255,255,255,0.08);
 
-  backdrop-filter:blur(6px);
+  backdrop-filter:blur(8px);
 }
 
 /* BOARD */
@@ -226,19 +216,13 @@ body{
   margin-bottom:16px;
 }
 
-/* CELLS */
+/* CELL */
 
 .cell{
 
   aspect-ratio:1/1;
 
   border-radius:22px;
-
-  background:
-  rgba(255,255,255,0.05);
-
-  border:
-  2px solid rgba(255,255,255,0.08);
 
   display:flex;
 
@@ -252,11 +236,16 @@ body{
 
   cursor:pointer;
 
-  transition:0.3s;
+  transition:0.25s;
+
+  background:
+  rgba(255,255,255,0.04);
+
+  border:
+  2px solid rgba(255,255,255,0.08);
 
   box-shadow:
-  inset 0 0 15px rgba(255,255,255,0.05),
-  0 0 10px rgba(255,255,255,0.04);
+  inset 0 0 10px rgba(255,255,255,0.03);
 }
 
 .cell:hover{
@@ -264,7 +253,7 @@ body{
   transform:scale(1.03);
 
   background:
-  rgba(255,255,255,0.08);
+  rgba(255,255,255,0.07);
 }
 
 /* STRIKE */
@@ -273,17 +262,17 @@ body{
 
   position:absolute;
 
+  height:6px;
+
   background:white;
 
-  border-radius:10px;
+  border-radius:20px;
 
   display:none;
 
-  z-index:10;
-
   box-shadow:
-  0 0 15px white,
-  0 0 30px white;
+  0 0 20px white,
+  0 0 40px white;
 }
 
 /* BUTTON */
@@ -294,13 +283,13 @@ button{
 
   padding:16px;
 
+  margin-bottom:16px;
+
   border:none;
 
-  border-radius:22px;
+  border-radius:24px;
 
   cursor:pointer;
-
-  margin-bottom:14px;
 
   color:white;
 
@@ -314,15 +303,15 @@ button{
 
   linear-gradient(
   90deg,
-  #4338ca,
+  #4f46e5,
   #9333ea,
-  #db2777
+  #ec4899
   );
 
   box-shadow:
-  0 0 25px rgba(147,51,234,0.5);
+  0 0 25px rgba(168,85,247,0.45);
 
-  transition:0.3s;
+  transition:0.25s;
 }
 
 button:hover{
@@ -339,86 +328,74 @@ button:hover{
   grid-template-columns:
   repeat(3,1fr);
 
-  gap:8px;
-
-  margin-top:5px;
+  gap:10px;
 }
 
-/* CARDS */
+/* CARD */
 
 .card{
 
-  padding:14px;
-
-  border-radius:20px;
-
   text-align:center;
+
+  padding:16px 10px;
+
+  border-radius:22px;
 
   background:
   rgba(0,0,0,0.35);
 
   border:
-  1px solid rgba(255,255,255,0.08);
+  1px solid rgba(255,255,255,0.07);
 
-  backdrop-filter:blur(6px);
+  backdrop-filter:blur(8px);
 }
 
 .card h3{
+
+  font-size:1.8rem;
 
   margin-bottom:6px;
 }
 
 .card p{
 
-  font-size:0.76rem;
-
-  opacity:0.8;
+  font-size:0.85rem;
 
   line-height:1.2;
+
+  opacity:0.85;
 }
 
 .card span{
 
   display:block;
 
-  margin-top:10px;
+  margin-top:12px;
 
-  font-size:2.4rem;
+  font-size:3rem;
 
   font-weight:bold;
 }
 
-/* WINNER */
+/* MOBILE */
 
-.winner{
-
-  animation:winnerGlow 0.8s infinite alternate;
-}
-
-@keyframes winnerGlow{
-
-  from{
-    transform:scale(1);
-  }
-
-  to{
-    transform:scale(1.08);
-  }
-
-}
-
-/* TABLET */
-
-@media(max-width:768px){
+@media(max-width:480px){
 
   .container{
 
-    align-items:flex-start;
+    padding:10px;
+  }
+
+  .game-panel{
+
+    padding:16px;
+
+    border-radius:26px;
   }
 
   .hero h1{
 
-    font-size:3rem;
+    font-size:3.3rem;
   }
 
   .hero p{
@@ -431,49 +408,16 @@ button:hover{
     font-size:1.7rem;
   }
 
-  .cell{
-
-    font-size:1.7rem;
-  }
-
-}
-
-/* MOBILE */
-
-@media(max-width:480px){
-
-  .game-panel{
-
-    padding:16px;
-
-    border-radius:24px;
-  }
-
-  .hero{
-
-    gap:10px;
-  }
-
-  .hero h1{
-
-    font-size:2.9rem;
-  }
-
-  .vs{
-
-    font-size:1.5rem;
-  }
-
   .status{
 
-    font-size:1rem;
+    font-size:1.05rem;
 
     padding:14px;
   }
 
   .cell{
 
-    font-size:1.5rem;
+    font-size:1.6rem;
 
     border-radius:18px;
   }
@@ -481,23 +425,26 @@ button:hover{
   button{
 
     padding:15px;
-
-    font-size:0.95rem;
   }
 
   .card{
 
-    padding:12px;
+    padding:14px 8px;
+  }
+
+  .card h3{
+
+    font-size:1.5rem;
   }
 
   .card p{
 
-    font-size:0.72rem;
+    font-size:0.75rem;
   }
 
   .card span{
 
-    font-size:2.2rem;
+    font-size:2.5rem;
   }
 
 }
