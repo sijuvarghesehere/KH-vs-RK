@@ -1,5 +1,11 @@
 console.log("Game Running");
 
+import { db, ref, set } from "./firebase.js";
+
+set(ref(db, "test"), {
+  status: "working"
+});
+
 const cells = document.querySelectorAll(".cell");
 
 const statusText = document.getElementById("status");
