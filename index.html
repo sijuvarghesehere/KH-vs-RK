@@ -2,117 +2,108 @@
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<meta charset="UTF-8">
+  <title>KH vs RK</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>KH vs RK</title>
-
-<link rel="manifest" href="manifest.json">
-
-<link rel="icon" href="icon.png">
-
-<link rel="stylesheet" href="style.css">
-
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-<div class="overlay"></div>
-
-<div class="game-container">
+  <div class="app">
 
     <!-- TOP -->
 
-    <div class="logo-area">
+    <div class="top-section">
 
-        <div class="player-side kh-side">
-            <h1>KH</h1>
-            <p>Kamal Haasan</p>
-        </div>
+      <div class="player-side kh-side">
+        <h1>KH</h1>
+        <p>Kamal Haasan</p>
+      </div>
 
-        <div class="center-logo">
-            <h2>VS</h2>
-        </div>
+      <div class="vs-text">
+        VS
+      </div>
 
-        <div class="player-side rk-side">
-            <h1>RK</h1>
-            <p>Rajinikanth</p>
-        </div>
-
-    </div>
-
-
-
-    <!-- MODE -->
-
-    <div class="mode-select">
-
-        <button id="pvpBtn" class="active">
-            2 Players
-        </button>
-
-        <button id="aiBtn">
-            Vs Computer
-        </button>
-
-        <button id="onlineBtn">
-            Online
-        </button>
+      <div class="player-side rk-side">
+        <h1>RK</h1>
+        <p>Rajinikanth</p>
+      </div>
 
     </div>
 
 
 
-    <!-- ONLINE -->
+    <!-- GAME MODE -->
+
+    <div class="mode-buttons">
+
+      <button id="twoPlayerBtn" class="mode-btn active-mode">
+        2 Players
+      </button>
+
+      <button id="computerBtn" class="mode-btn">
+        Vs Computer
+      </button>
+
+      <button id="onlineBtn" class="mode-btn">
+        Online
+      </button>
+
+    </div>
+
+
+
+    <!-- ONLINE ROOM -->
 
     <div class="online-controls">
 
-        <input
-            type="text"
-            id="roomInput"
-            placeholder="Room Code"
-        >
+      <input
+        type="text"
+        id="roomInput"
+        placeholder="Room Code"
+      />
 
-        <button id="createRoomBtn">
-            Create
-        </button>
+      <button id="createRoomBtn">
+        Create
+      </button>
 
-        <button id="joinRoomBtn">
-            Join
-        </button>
+      <button id="joinRoomBtn">
+        Join
+      </button>
 
     </div>
 
 
 
-    <!-- PLAYER SELECT -->
+    <!-- PLAYER CHOOSE -->
 
     <div class="player-select">
 
-        <button
-            id="chooseKH"
-            class="choose-btn kh-btn active-role"
-        >
-            Play as KH
-        </button>
+      <button
+        id="chooseKH"
+        class="choose-btn kh-btn active-role"
+      >
+        Play as KH
+      </button>
 
-        <button
-            id="chooseRK"
-            class="choose-btn rk-btn"
-        >
-            Play as RK
-        </button>
+      <button
+        id="chooseRK"
+        class="choose-btn rk-btn"
+      >
+        Play as RK
+      </button>
 
     </div>
 
 
 
-    <!-- STATUS -->
+    <!-- TURN -->
 
-    <div id="status" class="status">
-        KH Turn
+    <div class="turn-box">
+      <span id="turnText">KH Turn</span>
     </div>
 
 
@@ -121,17 +112,17 @@
 
     <div class="board" id="board">
 
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
+      <div class="cell" data-index="0"></div>
+      <div class="cell" data-index="1"></div>
+      <div class="cell" data-index="2"></div>
 
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
+      <div class="cell" data-index="3"></div>
+      <div class="cell" data-index="4"></div>
+      <div class="cell" data-index="5"></div>
 
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
+      <div class="cell" data-index="6"></div>
+      <div class="cell" data-index="7"></div>
+      <div class="cell" data-index="8"></div>
 
     </div>
 
@@ -139,59 +130,72 @@
 
     <!-- RESTART -->
 
-    <button class="restart-btn" id="restartBtn">
-        RESTART GAME
+    <button id="restartBtn" class="restart-btn">
+      RESTART GAME
     </button>
 
 
 
-    <!-- SCOREBOARD -->
+    <!-- SCORE -->
 
-    <div class="scoreboard">
+    <div class="score-board">
 
-        <div class="score-card kh-card">
+      <div class="score-card">
 
-            <h2>KH</h2>
+        <h2>KH</h2>
+        <p>Legend Mode</p>
 
-            <p>Legend Mode</p>
+        <span id="khScore">
+          0
+        </span>
 
-            <span id="khScore">0</span>
+      </div>
 
-        </div>
+      <div class="score-card">
 
+        <h2>DRAW</h2>
+        <p>Cinematic Battle</p>
 
+        <span id="drawScore">
+          0
+        </span>
 
-        <div class="score-card draw-card">
+      </div>
 
-            <h2>DRAW</h2>
+      <div class="score-card">
 
-            <p>Cinematic Battle</p>
+        <h2>RK</h2>
+        <p>Superstar Mode</p>
 
-            <span id="drawScore">0</span>
+        <span id="rkScore">
+          0
+        </span>
 
-        </div>
-
-
-
-        <div class="score-card rk-card">
-
-            <h2>RK</h2>
-
-            <p>Superstar Mode</p>
-
-            <span id="rkScore">0</span>
-
-        </div>
+      </div>
 
     </div>
 
-</div>
+  </div>
 
 
 
-<script type="module" src="firebase.js"></script>
+  <!-- FIREBASE -->
 
-<script type="module" src="script.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+
+
+  <!-- FIREBASE CONFIG -->
+
+  <script src="firebase.js"></script>
+
+
+
+  <!-- MAIN GAME -->
+
+  <script src="script.js"></script>
 
 </body>
 </html>
