@@ -41,25 +41,56 @@ const winPatterns = [
 
 createRoomBtn.onclick = () => {
 
-  roomId = Math.random().toString(36).substring(2, 8);
+  let customCode = roomInput.value.trim();
+
+
+  // Generate random room if empty
+
+  if(customCode === "") {
+
+    customCode =
+    Math.random()
+    .toString(36)
+    .substring(2, 8)
+    .toUpperCase();
+
+  }
+
+
+  // Remove spaces + uppercase
+
+  customCode = customCode
+  .replace(/\s+/g, "")
+  .toUpperCase();
+
+
+  roomId = customCode;
 
   playerRole = "KH";
 
+
   set(ref(db, "rooms/" + roomId), {
+
     board: ["", "", "", "", "", "", "", "", ""],
+
     turn: "KH",
+
     winner: "",
+
     player1: true,
+
     player2: false
+
   });
+
 
   roomInput.value = roomId;
 
   listenToRoom();
 
   alert("Room Created: " + roomId);
-};
 
+};
 
 
 // ======================
