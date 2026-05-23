@@ -3,9 +3,9 @@
 
 <head>
 
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>KH vs RK</title>
 
@@ -23,7 +23,7 @@
 
 <div class="game-container">
 
-    <!-- TOP AREA -->
+    <!-- TOP -->
 
     <div class="logo-area">
 
@@ -45,7 +45,7 @@
 
 
 
-    <!-- GAME MODE -->
+    <!-- MODE -->
 
     <div class="mode-select">
 
@@ -65,7 +65,7 @@
 
 
 
-    <!-- ONLINE ROOM -->
+    <!-- ONLINE -->
 
     <div class="online-controls">
 
@@ -87,6 +87,28 @@
 
 
 
+    <!-- PLAYER SELECT -->
+
+    <div class="player-select">
+
+        <button
+            id="chooseKH"
+            class="choose-btn kh-btn active-role"
+        >
+            Play as KH
+        </button>
+
+        <button
+            id="chooseRK"
+            class="choose-btn rk-btn"
+        >
+            Play as RK
+        </button>
+
+    </div>
+
+
+
     <!-- STATUS -->
 
     <div id="status" class="status">
@@ -95,7 +117,7 @@
 
 
 
-    <!-- GAME BOARD -->
+    <!-- BOARD -->
 
     <div class="board" id="board">
 
@@ -128,21 +150,37 @@
     <div class="scoreboard">
 
         <div class="score-card kh-card">
+
             <h2>KH</h2>
+
             <p>Legend Mode</p>
+
             <span id="khScore">0</span>
+
         </div>
+
+
 
         <div class="score-card draw-card">
+
             <h2>DRAW</h2>
+
             <p>Cinematic Battle</p>
+
             <span id="drawScore">0</span>
+
         </div>
 
+
+
         <div class="score-card rk-card">
+
             <h2>RK</h2>
+
             <p>Superstar Mode</p>
+
             <span id="rkScore">0</span>
+
         </div>
 
     </div>
@@ -151,11 +189,7 @@
 
 
 
-<!-- FIREBASE -->
-
 <script type="module" src="firebase.js"></script>
-
-<!-- GAME SCRIPT -->
 
 <script type="module" src="script.js"></script>
 
