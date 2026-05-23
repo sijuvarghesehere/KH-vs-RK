@@ -1,30 +1,16 @@
 console.log("Game Running");
 
-
-
-// =====================
-// FIREBASE
-// =====================
-
-const db = firebase.database();
-
-
-
-// =====================
-// ELEMENTS
-// =====================
-
 const cells = document.querySelectorAll(".cell");
 
-const turnText = document.getElementById("turnText");
+const statusText = document.getElementById("statusText");
 
 const restartBtn = document.getElementById("restartBtn");
 
-const khScoreText = document.getElementById("khScore");
+const khScoreEl = document.getElementById("khScore");
 
-const rkScoreText = document.getElementById("rkScore");
+const rkScoreEl = document.getElementById("rkScore");
 
-const drawScoreText = document.getElementById("drawScore");
+const drawScoreEl = document.getElementById("drawScore");
 
 const roomInput = document.getElementById("roomInput");
 
@@ -36,23 +22,15 @@ const chooseKH = document.getElementById("chooseKH");
 
 const chooseRK = document.getElementById("chooseRK");
 
-
-
-// =====================
-// VARIABLES
-// =====================
-
-let board = ["", "", "", "", "", "", "", "", ""];
+let board = ["","","","","","","","",""];
 
 let currentPlayer = "KH";
 
 let gameOver = false;
 
-let gameMode = "2P";
-
 let playerRole = "KH";
 
-let roomId = "";
+let roomId = null;
 
 let khScore = 0;
 
@@ -60,19 +38,28 @@ let rkScore = 0;
 
 let drawScore = 0;
 
+const wins = [
 
+  [0,1,2],
+  [3,4,5],
+  [6,7,8],
 
-// =====================
-// PLAYER SELECT
-// =====================
+  [0,3,6],
+  [1,4,7],
+  [2,5,8],
+
+  [0,4,8],
+  [2,4,6]
+
+];
 
 chooseKH.onclick = () => {
 
   playerRole = "KH";
 
-  chooseKH.classList.add("active-role");
+  chooseKH.classList.add("activeSide");
 
-  chooseRK.classList.remove("active-role");
+  chooseRK.classList.remove("activeSide");
 
 };
 
@@ -80,41 +67,11 @@ chooseRK.onclick = () => {
 
   playerRole = "RK";
 
-  chooseRK.classList.add("active-role");
+  chooseRK.classList.add("activeSide");
 
-  chooseKH.classList.remove("active-role");
-
-};
-
-
-
-// =====================
-// GAME MODE
-// =====================
-
-document.getElementById("twoPlayerBtn").onclick = () => {
-
-  gameMode = "2P";
+  chooseKH.classList.remove("activeSide");
 
 };
-
-document.getElementById("computerBtn").onclick = () => {
-
-  gameMode = "CPU";
-
-};
-
-document.getElementById("onlineBtn").onclick = () => {
-
-  gameMode = "ONLINE";
-
-};
-
-
-
-// =====================
-// BOARD CLICK
-// =====================
 
 cells.forEach(cell => {
 
@@ -122,146 +79,43 @@ cells.forEach(cell => {
 
     const index = cell.dataset.index;
 
-    handleMove(index);
+    if(board[index] !== "" || gameOver) return;
+
+    board[index] = currentPlayer;
+
+    renderBoard();
+
+    checkWinner();
+
+    currentPlayer = currentPlayer === "KH"
+      ? "RK"
+      : "KH";
+
+    statusText.innerText = currentPlayer + " Turn";
+
+    updateFirebase();
 
   });
 
 });
 
-
-
-// =====================
-// HANDLE MOVE
-// =====================
-
-function handleMove(index){
-
-  if(gameOver) return;
-
-  if(board[index] !== "") return;
-
-
-
-  // ONLINE MODE
-
-  if(gameMode === "ONLINE"){
-
-    if(currentPlayer !== playerRole) return;
-
-  }
-
-
-
-  board[index] = currentPlayer;
-
-
-
-  updateBoardUI();
-
-
-
-  checkWinner();
-
-
-
-  if(gameOver) return;
-
-
-
-  currentPlayer = currentPlayer === "KH"
-    ? "RK"
-    : "KH";
-
-
-
-  updateTurn();
-
-
-
-  // CPU
-
-  if(gameMode === "CPU" && currentPlayer === "RK"){
-
-    setTimeout(computerMove, 500);
-
-  }
-
-
-
-  // FIREBASE UPDATE
-
-  if(gameMode === "ONLINE"){
-
-    updateRoom();
-
-  }
-
-}
-
-
-
-// =====================
-// COMPUTER MOVE
-// =====================
-
-function computerMove(){
-
-  let empty = [];
-
-  board.forEach((v, i) => {
-
-    if(v === ""){
-
-      empty.push(i);
-
-    }
-
-  });
-
-  if(empty.length === 0) return;
-
-  let randomIndex =
-    empty[Math.floor(Math.random() * empty.length)];
-
-  handleMove(randomIndex);
-
-}
-
-
-
-// =====================
-// UPDATE BOARD UI
-// =====================
-
-function updateBoardUI(){
+function renderBoard() {
 
   cells.forEach((cell, index) => {
 
-    cell.classList.remove("kh");
+    cell.innerHTML = board[index];
 
-    cell.classList.remove("rk");
+    cell.classList.remove("khCell", "rkCell");
 
+    if(board[index] === "KH") {
 
-
-    if(board[index] === "KH"){
-
-      cell.innerText = "K";
-
-      cell.classList.add("kh");
+      cell.classList.add("khCell");
 
     }
 
-    else if(board[index] === "RK"){
+    if(board[index] === "RK") {
 
-      cell.innerText = "R";
-
-      cell.classList.add("rk");
-
-    }
-
-    else{
-
-      cell.innerText = "";
+      cell.classList.add("rkCell");
 
     }
 
@@ -269,77 +123,37 @@ function updateBoardUI(){
 
 }
 
+function checkWinner() {
 
-
-// =====================
-// TURN UI
-// =====================
-
-function updateTurn(){
-
-  turnText.innerText =
-    currentPlayer + " Turn";
-
-}
-
-
-
-// =====================
-// WINNER
-// =====================
-
-function checkWinner(){
-
-  const wins = [
-
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-
-    [0,4,8],
-    [2,4,6]
-
-  ];
-
-
-
-  for(let combo of wins){
+  for(let combo of wins) {
 
     const [a,b,c] = combo;
 
     if(
+
       board[a] &&
       board[a] === board[b] &&
       board[a] === board[c]
-    ){
+
+    ) {
 
       gameOver = true;
 
-      turnText.innerText =
-        board[a] + " Wins!";
+      statusText.innerText = board[a] + " Wins";
 
-
-
-      if(board[a] === "KH"){
+      if(board[a] === "KH") {
 
         khScore++;
 
-        khScoreText.innerText = khScore;
+        khScoreEl.innerText = khScore;
 
-      }
-      else{
+      } else {
 
         rkScore++;
 
-        rkScoreText.innerText = rkScore;
+        rkScoreEl.innerText = rkScore;
 
       }
-
-
 
       return;
 
@@ -347,109 +161,72 @@ function checkWinner(){
 
   }
 
-
-
-  // DRAW
-
-  if(!board.includes("")){
+  if(!board.includes("")) {
 
     gameOver = true;
 
+    statusText.innerText = "Draw";
+
     drawScore++;
 
-    drawScoreText.innerText = drawScore;
-
-    turnText.innerText = "DRAW";
+    drawScoreEl.innerText = drawScore;
 
   }
 
 }
 
-
-
-// =====================
-// RESTART
-// =====================
-
 restartBtn.onclick = () => {
 
-  board = ["", "", "", "", "", "", "", "", ""];
+  board = ["","","","","","","","",""];
 
   currentPlayer = "KH";
 
   gameOver = false;
 
+  statusText.innerText = "KH Turn";
 
+  renderBoard();
 
-  updateBoardUI();
-
-  updateTurn();
-
-
-
-  if(gameMode === "ONLINE"){
-
-    updateRoom();
-
-  }
+  updateFirebase();
 
 };
 
-
-
-// =====================
-// CREATE ROOM
-// =====================
-
 createRoomBtn.onclick = () => {
 
-  let customCode =
-    roomInput.value.trim();
+  let customCode = roomInput.value.trim();
 
-
-
-  // RANDOM ROOM
-
-  if(customCode === ""){
+  if(customCode === "") {
 
     customCode = Math.random()
       .toString(36)
-      .substring(2, 8)
+      .substring(2,8)
       .toUpperCase();
 
   }
 
-
-
-  customCode = customCode
-    .replace(/\s+/g, "")
-    .toUpperCase();
-
-
-
   roomId = customCode;
 
+  firebase.database().ref("rooms/" + roomId).set({
 
+    board,
 
-  setRoom();
+    currentPlayer,
+
+    gameOver
+
+  });
+
+  listenRoom();
+
+  alert("Room Created: " + roomId);
 
 };
 
-
-
-// =====================
-// JOIN ROOM
-// =====================
-
 joinRoomBtn.onclick = () => {
 
-  roomId = roomInput.value
-    .trim()
-    .toUpperCase();
+  roomId = roomInput.value.trim();
 
-
-
-  if(roomId === ""){
+  if(roomId === "") {
 
     alert("Enter Room Code");
 
@@ -457,101 +234,58 @@ joinRoomBtn.onclick = () => {
 
   }
 
-
-
-  playerRole =
-    playerRole === "KH"
-    ? "RK"
-    : "KH";
-
-
-
   listenRoom();
+
+  alert("Joined Room: " + roomId);
 
 };
 
+function updateFirebase() {
 
+  if(!roomId) return;
 
-// =====================
-// SET ROOM
-// =====================
+  firebase.database().ref("rooms/" + roomId).update({
 
-function setRoom(){
+    board,
 
-  db.ref("rooms/" + roomId).set({
+    currentPlayer,
 
-    board: board,
-
-    currentPlayer: currentPlayer,
-
-    gameOver: gameOver
-
-  });
-
-
-
-  roomInput.value = roomId;
-
-
-
-  listenRoom();
-
-
-
-  alert("Room Created: " + roomId);
-
-}
-
-
-
-// =====================
-// UPDATE ROOM
-// =====================
-
-function updateRoom(){
-
-  db.ref("rooms/" + roomId).update({
-
-    board: board,
-
-    currentPlayer: currentPlayer,
-
-    gameOver: gameOver
+    gameOver
 
   });
 
 }
 
+function listenRoom() {
 
+  firebase.database().ref("rooms/" + roomId)
 
-// =====================
-// LISTEN ROOM
-// =====================
-
-function listenRoom(){
-
-  db.ref("rooms/" + roomId)
     .on("value", snapshot => {
 
       const data = snapshot.val();
 
       if(!data) return;
 
-
-
       board = data.board;
 
-      currentPlayer =
-        data.currentPlayer;
+      currentPlayer = data.currentPlayer;
 
-      gameOver =
-        data.gameOver;
+      gameOver = data.gameOver;
 
+      renderBoard();
 
+      statusText.innerText = currentPlayer + " Turn";
 
-      updateBoardUI();
+    });
 
-      updateTurn();
+}
+
+if("serviceWorker" in navigator) {
+
+  navigator.serviceWorker.register("./sw.js")
+    .then(() => {
+
+      console.log("SW Registered");
 
     });
 
