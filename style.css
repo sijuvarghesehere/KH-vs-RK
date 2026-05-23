@@ -1,388 +1,203 @@
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:sans-serif;
 }
 
 body{
-    background:#000;
-    color:white;
-    font-family:Arial, Helvetica, sans-serif;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    overflow-x:hidden;
-
-    background-image:url("bg.png");
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
+  background:url("bg.jpg") center/cover no-repeat fixed;
+  min-height:100vh;
+  color:white;
 }
 
 .app{
-    width:100%;
-    max-width:430px;
-
-    min-height:100vh;
-
-    padding:20px 16px 30px;
-
-    backdrop-filter:blur(4px);
-
-    background:rgba(0,0,0,0.45);
+  width:100%;
+  max-width:430px;
+  margin:auto;
+  padding:20px;
 }
 
-
-
-/* =========================
-TOP
-========================= */
-
-.top-section{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    margin-bottom:24px;
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
 }
 
-.player-side{
-    text-align:center;
-    width:120px;
+.hero{
+  text-align:center;
 }
 
-.player-side h1{
-    font-size:72px;
-    font-weight:900;
+.abbr{
+  font-size:70px;
+  font-weight:bold;
 }
 
-.player-side p{
-    margin-top:6px;
-    font-size:16px;
+.khGlow{
+  color:#2b7fff;
+  text-shadow:0 0 20px #2b7fff;
 }
 
-.kh-side h1{
-    color:#2979ff;
-    text-shadow:0 0 20px #2979ff;
+.rkGlow{
+  color:#ff7a00;
+  text-shadow:0 0 20px #ff7a00;
 }
 
-.rk-side h1{
-    color:#ff6a00;
-    text-shadow:0 0 20px #ff6a00;
+.name{
+  font-size:14px;
 }
 
-.vs-text{
-    font-size:54px;
-    font-weight:900;
+.versus{
+  font-size:55px;
+  font-weight:bold;
 }
 
-
-
-/* =========================
-MODE BUTTONS
-========================= */
-
-.mode-buttons{
-    display:flex;
-    gap:10px;
-
-    margin-bottom:18px;
+.modes{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
 }
 
-.mode-btn{
-    flex:1;
-
-    height:54px;
-
-    border:none;
-    border-radius:18px;
-
-    color:white;
-
-    background:rgba(255,255,255,0.08);
-
-    font-size:16px;
-    cursor:pointer;
+.modeBtn{
+  flex:1;
+  height:55px;
+  border:none;
+  border-radius:18px;
+  background:#111;
+  color:white;
 }
 
-.active-mode{
-    background:linear-gradient(135deg,#3b5cff,#ff4da6);
-
-    box-shadow:0 0 20px rgba(255,0,150,0.35);
+.activeMode{
+  background:linear-gradient(90deg,#355dff,#ff4fa0);
 }
 
-
-
-/* =========================
-ONLINE
-========================= */
-
-.online-controls{
-    display:flex;
-    gap:10px;
-
-    margin-bottom:18px;
+.onlineSection{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
 }
 
-.online-controls input{
-    flex:1;
-
-    height:52px;
-
-    border:none;
-    outline:none;
-
-    border-radius:16px;
-
-    background:rgba(255,255,255,0.08);
-
-    padding:0 16px;
-
-    color:white;
-
-    font-size:16px;
+#roomInput{
+  flex:1;
+  height:50px;
+  border:none;
+  border-radius:15px;
+  padding:15px;
+  background:#111;
+  color:white;
 }
 
-.online-controls button{
-    width:84px;
-
-    border:none;
-
-    border-radius:16px;
-
-    color:white;
-
-    background:#081d52;
-
-    font-size:16px;
-
-    cursor:pointer;
+#createRoomBtn,
+#joinRoomBtn{
+  width:75px;
+  border:none;
+  border-radius:15px;
+  background:#001d73;
+  color:white;
 }
 
-
-
-/* =========================
-PLAYER SELECT
-========================= */
-
-.player-select{
-    display:flex;
-
-    gap:10px;
-
-    margin-bottom:20px;
+.chooseSide{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
 }
 
-.choose-btn{
-    flex:1;
-
-    height:48px;
-
-    border:none;
-
-    border-radius:16px;
-
-    color:white;
-
-    font-size:16px;
-    font-weight:700;
-
-    cursor:pointer;
-
-    background:rgba(255,255,255,0.08);
+.sideBtn{
+  flex:1;
+  height:55px;
+  border:none;
+  border-radius:15px;
+  background:#111;
+  color:white;
 }
 
-.kh-btn.active-role{
-    background:linear-gradient(135deg,#0066ff,#00aeff);
-
-    box-shadow:0 0 18px rgba(0,100,255,0.5);
+.activeSide{
+  background:linear-gradient(90deg,#0077ff,#1fa2ff);
 }
 
-.rk-btn.active-role{
-    background:linear-gradient(135deg,#ff6600,#ff2200);
-
-    box-shadow:0 0 18px rgba(255,80,0,0.5);
+.status{
+  height:75px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.6);
+  border-radius:25px;
+  font-size:24px;
+  font-weight:bold;
+  margin-bottom:20px;
 }
-
-
-
-/* =========================
-TURN
-========================= */
-
-.turn-box{
-    height:70px;
-
-    border-radius:22px;
-
-    background:rgba(0,0,0,0.5);
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    margin-bottom:26px;
-}
-
-#turnText{
-    font-size:28px;
-    font-weight:900;
-}
-
-
-
-/* =========================
-BOARD
-========================= */
 
 .board{
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:14px;
-
-    margin-bottom:30px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
 }
 
 .cell{
-    aspect-ratio:1/1;
+  aspect-ratio:1/1;
+  border-radius:25px;
+  background:rgba(0,0,0,.5);
+  border:2px solid rgba(255,255,255,.08);
 
-    border-radius:24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    background:rgba(255,255,255,0.05);
-
-    border:2px solid rgba(255,255,255,0.08);
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    font-size:54px;
-    font-weight:900;
-
-    cursor:pointer;
-
-    backdrop-filter:blur(5px);
+  font-size:42px;
+  font-weight:bold;
 }
 
-.cell.kh{
-    color:#2979ff;
-
-    text-shadow:0 0 18px #2979ff;
+.khCell{
+  color:#2b7fff;
+  text-shadow:0 0 20px #2b7fff;
 }
 
-.cell.rk{
-    color:#ff6a00;
-
-    text-shadow:0 0 18px #ff6a00;
+.rkCell{
+  color:#ff7a00;
+  text-shadow:0 0 20px #ff7a00;
 }
 
+.restartBtn{
+  width:100%;
+  height:75px;
+  border:none;
+  border-radius:25px;
+  margin-top:25px;
+  margin-bottom:25px;
 
+  background:linear-gradient(90deg,#355dff,#ff2d8d);
 
-/* =========================
-RESTART
-========================= */
-
-.restart-btn{
-    width:100%;
-
-    height:74px;
-
-    border:none;
-
-    border-radius:30px;
-
-    background:linear-gradient(135deg,#3b5cff,#ff2d96);
-
-    color:white;
-
-    font-size:22px;
-    font-weight:900;
-
-    margin-bottom:28px;
-
-    cursor:pointer;
-
-    box-shadow:0 0 25px rgba(255,0,120,0.45);
+  color:white;
+  font-size:20px;
+  font-weight:bold;
 }
 
-
-
-/* =========================
-SCORE
-========================= */
-
-.score-board{
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:12px;
+.scores{
+  display:flex;
+  gap:12px;
 }
 
-.score-card{
-    background:rgba(0,0,0,0.45);
-
-    border:1px solid rgba(255,255,255,0.08);
-
-    border-radius:26px;
-
-    padding:18px 10px;
-
-    text-align:center;
-
-    backdrop-filter:blur(4px);
+.scoreCard{
+  flex:1;
+  background:rgba(0,0,0,.55);
+  border-radius:25px;
+  padding:20px 10px;
+  text-align:center;
 }
 
-.score-card h2{
-    font-size:22px;
-
-    margin-bottom:10px;
+.scoreCard h2{
+  font-size:22px;
 }
 
-.score-card p{
-    font-size:14px;
-
-    margin-bottom:16px;
-
-    opacity:0.85;
+.scoreCard p{
+  font-size:12px;
+  margin-top:8px;
 }
 
-.score-card span{
-    font-size:52px;
-
-    font-weight:900;
-}
-
-.score-card:nth-child(1) h2{
-    color:#2979ff;
-}
-
-.score-card:nth-child(3) h2{
-    color:#ff6a00;
-}
-
-
-
-/* =========================
-MOBILE
-========================= */
-
-@media(max-width:430px){
-
-    .player-side h1{
-        font-size:64px;
-    }
-
-    .vs-text{
-        font-size:44px;
-    }
-
-    .restart-btn{
-        height:68px;
-        font-size:20px;
-    }
-
+.scoreCard span{
+  display:block;
+  margin-top:15px;
+  font-size:48px;
+  font-weight:bold;
 }
