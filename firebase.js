@@ -1,21 +1,23 @@
 const firebaseConfig = {
 
-  apiKey: "YOUR_API_KEY",
+  apiKey: "AIzaSyBJMxsv_Eoc9wmAaDTBP5yizC74Sq2Qbx8",
 
-  authDomain: "YOUR_AUTH_DOMAIN",
+  authDomain: "kh-vs-rk.firebaseapp.com",
 
-  databaseURL: "YOUR_DATABASE_URL",
+  databaseURL: "https://kh-vs-rk-default-rtdb.asia-southeast1.firebasedatabase.app",
 
-  projectId: "YOUR_PROJECT_ID",
+  projectId: "kh-vs-rk",
 
-  storageBucket: "YOUR_STORAGE_BUCKET",
+  storageBucket: "kh-vs-rk.firebasestorage.app",
 
-  messagingSenderId: "YOUR_SENDER_ID",
+  messagingSenderId: "964165675585",
 
-  appId: "YOUR_APP_ID"
+  appId: "1:964165675585:web:81684da230f70398e1b4c0"
 
 };
 
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.database();
+
+console.log("Firebase Connected");
