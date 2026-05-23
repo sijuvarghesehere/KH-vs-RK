@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+  />
 
   <title>KH vs RK</title>
 
   <link rel="stylesheet" href="style.css" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#000000" />
 </head>
 
 <body>
@@ -15,50 +21,41 @@
   <div class="app">
 
     <!-- TOP -->
+    <div class="top">
 
-    <div class="top-section">
-
-      <div class="player-side kh-side">
-        <h1>KH</h1>
-        <p>Kamal Haasan</p>
+      <div class="hero leftHero">
+        <div class="abbr khGlow">KH</div>
+        <div class="name">Kamal Haasan</div>
       </div>
 
-      <div class="vs-text">
-        VS
-      </div>
+      <div class="versus">VS</div>
 
-      <div class="player-side rk-side">
-        <h1>RK</h1>
-        <p>Rajinikanth</p>
+      <div class="hero rightHero">
+        <div class="abbr rkGlow">RK</div>
+        <div class="name">Rajinikanth</div>
       </div>
 
     </div>
 
+    <!-- MODES -->
+    <div class="modes">
 
-
-    <!-- GAME MODE -->
-
-    <div class="mode-buttons">
-
-      <button id="twoPlayerBtn" class="mode-btn active-mode">
+      <button class="modeBtn activeMode" id="twoPlayerBtn">
         2 Players
       </button>
 
-      <button id="computerBtn" class="mode-btn">
+      <button class="modeBtn" id="computerBtn">
         Vs Computer
       </button>
 
-      <button id="onlineBtn" class="mode-btn">
+      <button class="modeBtn" id="onlineBtn">
         Online
       </button>
 
     </div>
 
-
-
-    <!-- ONLINE ROOM -->
-
-    <div class="online-controls">
+    <!-- ONLINE -->
+    <div class="onlineSection">
 
       <input
         type="text"
@@ -76,40 +73,25 @@
 
     </div>
 
+    <!-- PLAYER PICK -->
+    <div class="chooseSide">
 
-
-    <!-- PLAYER CHOOSE -->
-
-    <div class="player-select">
-
-      <button
-        id="chooseKH"
-        class="choose-btn kh-btn active-role"
-      >
+      <button class="sideBtn activeSide" id="chooseKH">
         Play as KH
       </button>
 
-      <button
-        id="chooseRK"
-        class="choose-btn rk-btn"
-      >
+      <button class="sideBtn" id="chooseRK">
         Play as RK
       </button>
 
     </div>
 
-
-
-    <!-- TURN -->
-
-    <div class="turn-box">
-      <span id="turnText">KH Turn</span>
+    <!-- STATUS -->
+    <div class="status" id="statusText">
+      KH Turn
     </div>
 
-
-
-    <!-- BOARD -->
-
+    <!-- GAME BOARD -->
     <div class="board" id="board">
 
       <div class="cell" data-index="0"></div>
@@ -126,75 +108,41 @@
 
     </div>
 
-
-
     <!-- RESTART -->
-
-    <button id="restartBtn" class="restart-btn">
+    <button class="restartBtn" id="restartBtn">
       RESTART GAME
     </button>
 
-
-
     <!-- SCORE -->
+    <div class="scores">
 
-    <div class="score-board">
-
-      <div class="score-card">
-
-        <h2>KH</h2>
+      <div class="scoreCard">
+        <h2 class="khGlow">KH</h2>
         <p>Legend Mode</p>
-
-        <span id="khScore">
-          0
-        </span>
-
+        <span id="khScore">0</span>
       </div>
 
-      <div class="score-card">
-
+      <div class="scoreCard">
         <h2>DRAW</h2>
         <p>Cinematic Battle</p>
-
-        <span id="drawScore">
-          0
-        </span>
-
+        <span id="drawScore">0</span>
       </div>
 
-      <div class="score-card">
-
-        <h2>RK</h2>
+      <div class="scoreCard">
+        <h2 class="rkGlow">RK</h2>
         <p>Superstar Mode</p>
-
-        <span id="rkScore">
-          0
-        </span>
-
+        <span id="rkScore">0</span>
       </div>
 
     </div>
 
   </div>
 
-
-
   <!-- FIREBASE -->
-
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
-
-
-  <!-- FIREBASE CONFIG -->
-
   <script src="firebase.js"></script>
-
-
-
-  <!-- MAIN GAME -->
-
   <script src="script.js"></script>
 
 </body>
