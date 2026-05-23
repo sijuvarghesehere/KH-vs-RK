@@ -1,11 +1,12 @@
-console.log("Game Running");
-
 import { db, ref, set } from "./firebase.js";
+
+console.log("Firebase Test Started");
 
 set(ref(db, "test"), {
   status: "working"
 });
 
+console.log("Firebase Write Complete");
 const cells = document.querySelectorAll(".cell");
 
 const statusText = document.getElementById("status");
