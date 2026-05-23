@@ -1,357 +1,185 @@
-const cells =
-document.querySelectorAll(".cell");
+const cells = document.querySelectorAll(".cell");
 
-const statusText =
-document.getElementById("status");
+const statusText = document.getElementById("status");
 
-const restartBtn =
-document.getElementById("restartBtn");
+const restartBtn = document.getElementById("restartBtn");
 
-const strike =
-document.getElementById("strike");
+const khScoreText = document.getElementById("khScore");
+const rkScoreText = document.getElementById("rkScore");
+const drawScoreText = document.getElementById("drawScore");
 
-const khScoreText =
-document.getElementById("khScore");
-
-const rkScoreText =
-document.getElementById("rkScore");
-
-const drawScoreText =
-document.getElementById("drawScore");
+const pvpBtn = document.getElementById("pvpBtn");
+const aiBtn = document.getElementById("aiBtn");
+const onlineBtn = document.getElementById("onlineBtn");
 
 let currentPlayer = "KH";
 
+let board = ["","","","","","","","",""];
+
 let gameActive = true;
 
-let khScore =
-localStorage.getItem("khScore") || 0;
+let gameMode = "pvp";
 
-let rkScore =
-localStorage.getItem("rkScore") || 0;
+let khScore = 0;
+let rkScore = 0;
+let drawScore = 0;
 
-let drawScore =
-localStorage.getItem("drawScore") || 0;
-
-khScoreText.textContent = khScore;
-
-rkScoreText.textContent = rkScore;
-
-drawScoreText.textContent = drawScore;
-
-let gameState = [
-
-"", "", "",
-"", "", "",
-"", "", ""
-
+const winPatterns = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
 ];
 
-const winningConditions = [
+pvpBtn.onclick = ()=>{
+    gameMode = "pvp";
+    setActiveButton(pvpBtn);
+};
 
-[0,1,2],
-[3,4,5],
-[6,7,8],
+aiBtn.onclick = ()=>{
+    gameMode = "ai";
+    setActiveButton(aiBtn);
+};
 
-[0,3,6],
-[1,4,7],
-[2,5,8],
+onlineBtn.onclick = ()=>{
+    gameMode = "online";
+    setActiveButton(onlineBtn);
+};
 
-[0,4,8],
-[2,4,6]
+function setActiveButton(btn){
 
-];
+    document.querySelectorAll(".mode-select button")
+    .forEach(b=>b.classList.remove("active"));
 
-cells.forEach(cell=>{
+    btn.classList.add("active");
+}
 
-cell.addEventListener(
-"click",
-handleCellClick
-);
+cells.forEach((cell,index)=>{
+
+    cell.addEventListener("click",()=>{
+
+        if(board[index] !== "" || !gameActive) return;
+
+        makeMove(index,currentPlayer);
+
+        if(gameMode === "ai" &&
+            currentPlayer === "RK" &&
+            gameActive){
+
+            setTimeout(computerMove,500);
+        }
+
+    });
 
 });
 
-restartBtn.addEventListener(
-"click",
-restartGame
-);
+function makeMove(index,player){
 
-function handleCellClick(event){
+    board[index] = player;
 
-const clickedCell =
-event.target;
+    cells[index].innerHTML = player;
 
-const clickedIndex =
-clickedCell.dataset.index;
+    cells[index].classList.add(
+        player === "KH" ? "kh" : "rk"
+    );
 
-if(
-gameState[clickedIndex] !== "" ||
-!gameActive
-){
-return;
+    checkWinner();
+
+    currentPlayer =
+        currentPlayer === "KH" ? "RK" : "KH";
+
+    if(gameActive){
+        statusText.innerHTML =
+            currentPlayer + " Turn";
+    }
 }
 
-navigator.vibrate(50);
+function computerMove(){
 
-gameState[clickedIndex] =
-currentPlayer;
+    let empty = [];
 
-clickedCell.textContent =
-currentPlayer;
+    board.forEach((v,i)=>{
+        if(v === "") empty.push(i);
+    });
 
-clickedCell.classList.add(
+    if(empty.length === 0) return;
 
-currentPlayer === "KH"
-? "kh"
-: "rk"
+    let random =
+        empty[Math.floor(Math.random()*empty.length)];
 
-);
-
-checkWinner();
+    makeMove(random,"RK");
 }
 
 function checkWinner(){
 
-for(
-let i=0;
-i<winningConditions.length;
-i++
-){
+    let winner = null;
 
-const condition =
-winningConditions[i];
+    winPatterns.forEach(pattern=>{
 
-const a =
-gameState[condition[0]];
+        const [a,b,c] = pattern;
 
-const b =
-gameState[condition[1]];
+        if(
+            board[a] &&
+            board[a] === board[b] &&
+            board[a] === board[c]
+        ){
+            winner = board[a];
+        }
 
-const c =
-gameState[condition[2]];
+    });
 
-if(
-a === "" ||
-b === "" ||
-c === ""
-){
-continue;
+    if(winner){
+
+        gameActive = false;
+
+        statusText.innerHTML =
+            winner + " Wins";
+
+        if(winner === "KH"){
+            khScore++;
+            khScoreText.innerHTML = khScore;
+        }else{
+            rkScore++;
+            rkScoreText.innerHTML = rkScore;
+        }
+
+        return;
+    }
+
+    if(!board.includes("")){
+
+        gameActive = false;
+
+        drawScore++;
+
+        drawScoreText.innerHTML = drawScore;
+
+        statusText.innerHTML = "Draw";
+    }
 }
 
-if(a === b && b === c){
-
-gameActive = false;
-
-drawStrike(i);
-
-winningConditions[i]
-.forEach(index=>{
-
-cells[index]
-.classList.add("winner");
-
-});
-
-if(currentPlayer === "KH"){
-
-khScore++;
-
-localStorage.setItem(
-"khScore",
-khScore
-);
-
-khScoreText.textContent =
-khScore;
-
-}else{
-
-rkScore++;
-
-localStorage.setItem(
-"rkScore",
-rkScore
-);
-
-rkScoreText.textContent =
-rkScore;
-
-}
-
-statusText.innerHTML =
-
-currentPlayer === "KH"
-
-? "<span class='kh'>KH Wins 👑</span>"
-
-: "<span class='rk'>RK Wins 👑</span>";
-
-navigator.vibrate([100,50,100]);
-
-return;
-}
-}
-
-const draw =
-!gameState.includes("");
-
-if(draw){
-
-drawScore++;
-
-localStorage.setItem(
-"drawScore",
-drawScore
-);
-
-drawScoreText.textContent =
-drawScore;
-
-statusText.innerHTML =
-"🤝 Draw Match";
-
-gameActive = false;
-
-return;
-}
-
-currentPlayer =
-
-currentPlayer === "KH"
-? "RK"
-: "KH";
-
-statusText.innerHTML =
-
-currentPlayer === "KH"
-
-? "<span class='kh'>KH Turn</span>"
-
-: "<span class='rk'>RK Turn</span>";
-}
-
-function drawStrike(index){
-
-strike.style.display = "block";
-
-const positions = [
-
-{
-top:"16.5%",
-left:"0",
-width:"100%",
-height:"6px",
-transform:"none"
-},
-
-{
-top:"49.5%",
-left:"0",
-width:"100%",
-height:"6px",
-transform:"none"
-},
-
-{
-top:"83%",
-left:"0",
-width:"100%",
-height:"6px",
-transform:"none"
-},
-
-{
-top:"0",
-left:"16.5%",
-width:"6px",
-height:"100%",
-transform:"none"
-},
-
-{
-top:"0",
-left:"49.5%",
-width:"6px",
-height:"100%",
-transform:"none"
-},
-
-{
-top:"0",
-left:"83%",
-width:"6px",
-height:"100%",
-transform:"none"
-},
-
-{
-top:"50%",
-left:"50%",
-width:"140%",
-height:"6px",
-
-transform:
-"translate(-50%,-50%) rotate(45deg)"
-},
-
-{
-top:"50%",
-left:"50%",
-width:"140%",
-height:"6px",
-
-transform:
-"translate(-50%,-50%) rotate(-45deg)"
-}
-
-];
-
-const position =
-positions[index];
-
-strike.style.top =
-position.top;
-
-strike.style.left =
-position.left;
-
-strike.style.width =
-position.width;
-
-strike.style.height =
-position.height;
-
-strike.style.transform =
-position.transform;
-}
+restartBtn.onclick = restartGame;
 
 function restartGame(){
 
-currentPlayer = "KH";
+    board = ["","","","","","","","",""];
 
-gameActive = true;
+    gameActive = true;
 
-gameState = [
+    currentPlayer = "KH";
 
-"", "", "",
-"", "", "",
-"", "", ""
+    statusText.innerHTML = "KH Turn";
 
-];
+    cells.forEach(cell=>{
 
-statusText.innerHTML =
-"<span class='kh'>KH Turn</span>";
+        cell.innerHTML = "";
 
-cells.forEach(cell=>{
+        cell.classList.remove("kh");
+        cell.classList.remove("rk");
 
-cell.textContent = "";
-
-cell.classList.remove(
-"kh",
-"rk",
-"winner"
-);
-
-});
-
-strike.style.display = "none";
+    });
 }
