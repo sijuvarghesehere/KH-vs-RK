@@ -6,7 +6,7 @@
 }
 
 body{
-  background:url("bg.jpg") center/cover no-repeat fixed;
+  background:url("bg.png") center/cover no-repeat fixed;
   min-height:100vh;
   color:white;
 }
