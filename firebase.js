@@ -1,19 +1,11 @@
 const firebaseConfig = {
-
-    apiKey: "YOUR_API_KEY",
-
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-
-    databaseURL: "YOUR_DATABASE_URL",
-
-    projectId: "YOUR_PROJECT_ID",
-
-    storageBucket: "YOUR_PROJECT.appspot.com",
-
-    messagingSenderId: "YOUR_ID",
-
-    appId: "YOUR_APP_ID"
-};
+    apiKey: "AIzaSyBJMxsv_Eoc9wmAaDTBP5yizC74Sq2Qbx8",
+    authDomain: "kh-vs-rk.firebaseapp.com",
+    projectId: "kh-vs-rk",
+    storageBucket: "kh-vs-rk.firebasestorage.app",
+    messagingSenderId: "964165675585",
+    appId: "1:964165675585:web:81684da230f70398e1b4c0"
+  };
 
 firebase.initializeApp(firebaseConfig);
 
