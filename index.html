@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8" />
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>KH vs RK</title>
 
 <link rel="manifest" href="manifest.json">
+
 <link rel="icon" href="icon.png">
 
 <link rel="stylesheet" href="style.css">
-
-<script type="module" src="firebase.js"></script>
-
-<script type="module" src="script.js"></script>
 
 </head>
 
@@ -23,7 +23,10 @@
 
 <div class="game-container">
 
+    <!-- TOP AREA -->
+
     <div class="logo-area">
+
         <div class="player-side kh-side">
             <h1>KH</h1>
             <p>Kamal Haasan</p>
@@ -37,37 +40,90 @@
             <h1>RK</h1>
             <p>Rajinikanth</p>
         </div>
+
     </div>
+
+
+
+    <!-- GAME MODE -->
 
     <div class="mode-select">
-        <button id="pvpBtn" class="active">2 Players</button>
-        <button id="aiBtn">Vs Computer</button>
-        <button id="onlineBtn">Online</button>
+
+        <button id="pvpBtn" class="active">
+            2 Players
+        </button>
+
+        <button id="aiBtn">
+            Vs Computer
+        </button>
+
+        <button id="onlineBtn">
+            Online
+        </button>
+
     </div>
+
+
+
+    <!-- ONLINE ROOM -->
 
     <div class="online-controls">
-        <input type="text" id="roomInput" placeholder="Room Code">
-        <button id="createRoom">Create</button>
-        <button id="joinRoom">Join</button>
+
+        <input
+            type="text"
+            id="roomInput"
+            placeholder="Room Code"
+        >
+
+        <button id="createRoomBtn">
+            Create
+        </button>
+
+        <button id="joinRoomBtn">
+            Join
+        </button>
+
     </div>
 
-    <div id="status" class="status">KH Turn</div>
+
+
+    <!-- STATUS -->
+
+    <div id="status" class="status">
+        KH Turn
+    </div>
+
+
+
+    <!-- GAME BOARD -->
 
     <div class="board" id="board">
+
         <div class="cell"></div>
         <div class="cell"></div>
         <div class="cell"></div>
+
         <div class="cell"></div>
         <div class="cell"></div>
         <div class="cell"></div>
+
         <div class="cell"></div>
         <div class="cell"></div>
         <div class="cell"></div>
+
     </div>
+
+
+
+    <!-- RESTART -->
 
     <button class="restart-btn" id="restartBtn">
         RESTART GAME
     </button>
+
+
+
+    <!-- SCOREBOARD -->
 
     <div class="scoreboard">
 
@@ -93,7 +149,14 @@
 
 </div>
 
+
+
+<!-- FIREBASE -->
+
 <script type="module" src="firebase.js"></script>
+
+<!-- GAME SCRIPT -->
+
 <script type="module" src="script.js"></script>
 
 </body>
