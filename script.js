@@ -1,187 +1,268 @@
-import { db, ref, set } from "./firebase.js";
+import { db, ref, set, onValue, update } from "./firebase.js";
 
 const cells = document.querySelectorAll(".cell");
-
 const statusText = document.getElementById("status");
-
 const restartBtn = document.getElementById("restartBtn");
 
-const khScoreText = document.getElementById("khScore");
-const rkScoreText = document.getElementById("rkScore");
-const drawScoreText = document.getElementById("drawScore");
+const khScoreEl = document.getElementById("khScore");
+const rkScoreEl = document.getElementById("rkScore");
+const drawScoreEl = document.getElementById("drawScore");
 
-const pvpBtn = document.getElementById("pvpBtn");
-const aiBtn = document.getElementById("aiBtn");
-const onlineBtn = document.getElementById("onlineBtn");
+const createRoomBtn = document.getElementById("createRoomBtn");
+const joinRoomBtn = document.getElementById("joinRoomBtn");
+const roomInput = document.getElementById("roomInput");
 
+let board = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer = "KH";
 
-let board = ["","","","","","","","",""];
+let roomId = "";
+let playerRole = "";
 
-let gameActive = true;
-
-let gameMode = "pvp";
-
-let khScore = 0;
-let rkScore = 0;
-let drawScore = 0;
+let khWins = 0;
+let rkWins = 0;
+let draws = 0;
 
 const winPatterns = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
+  [0,1,2],
+  [3,4,5],
+  [6,7,8],
+  [0,3,6],
+  [1,4,7],
+  [2,5,8],
+  [0,4,8],
+  [2,4,6]
 ];
 
-pvpBtn.onclick = ()=>{
-    gameMode = "pvp";
-    setActiveButton(pvpBtn);
+
+
+// ======================
+// CREATE ROOM
+// ======================
+
+createRoomBtn.onclick = () => {
+
+  roomId = Math.random().toString(36).substring(2, 8);
+
+  playerRole = "KH";
+
+  set(ref(db, "rooms/" + roomId), {
+    board: ["", "", "", "", "", "", "", "", ""],
+    turn: "KH",
+    winner: "",
+    player1: true,
+    player2: false
+  });
+
+  roomInput.value = roomId;
+
+  listenToRoom();
+
+  alert("Room Created: " + roomId);
 };
 
-aiBtn.onclick = ()=>{
-    gameMode = "ai";
-    setActiveButton(aiBtn);
+
+
+// ======================
+// JOIN ROOM
+// ======================
+
+joinRoomBtn.onclick = () => {
+
+  roomId = roomInput.value.trim();
+
+  if(roomId === "") {
+    alert("Enter Room Code");
+    return;
+  }
+
+  playerRole = "RK";
+
+  update(ref(db, "rooms/" + roomId), {
+    player2: true
+  });
+
+  listenToRoom();
+
+  alert("Joined Room: " + roomId);
 };
 
-onlineBtn.onclick = ()=>{
-    gameMode = "online";
-    setActiveButton(onlineBtn);
-};
 
-function setActiveButton(btn){
 
-    document.querySelectorAll(".mode-select button")
-    .forEach(b=>b.classList.remove("active"));
+// ======================
+// LISTEN TO ROOM
+// ======================
 
-    btn.classList.add("active");
+function listenToRoom() {
+
+  const roomRef = ref(db, "rooms/" + roomId);
+
+  onValue(roomRef, (snapshot) => {
+
+    const data = snapshot.val();
+
+    if(!data) return;
+
+    board = data.board;
+    currentPlayer = data.turn;
+
+    updateBoardUI();
+
+  });
 }
 
-cells.forEach((cell,index)=>{
 
-    cell.addEventListener("click",()=>{
 
-        if(board[index] !== "" || !gameActive) return;
+// ======================
+// CELL CLICK
+// ======================
 
-        makeMove(index,currentPlayer);
+cells.forEach((cell, index) => {
 
-        if(gameMode === "ai" &&
-            currentPlayer === "RK" &&
-            gameActive){
+  cell.addEventListener("click", () => {
 
-            setTimeout(computerMove,500);
-        }
+    if(roomId === "") {
+      alert("Create or Join Room First");
+      return;
+    }
 
+    if(board[index] !== "") return;
+
+    if(currentPlayer !== playerRole) return;
+
+    board[index] = currentPlayer;
+
+    let nextTurn = currentPlayer === "KH" ? "RK" : "KH";
+
+    const winner = checkWinner();
+
+    if(winner) {
+
+      if(winner === "KH") khWins++;
+      if(winner === "RK") rkWins++;
+      if(winner === "DRAW") draws++;
+
+      updateScores();
+
+      update(ref(db, "rooms/" + roomId), {
+        board: board,
+        turn: currentPlayer,
+        winner: winner
+      });
+
+      if(winner === "DRAW") {
+        statusText.innerText = "Draw Match";
+      } else {
+        statusText.innerText = winner + " Wins";
+      }
+
+      return;
+    }
+
+    update(ref(db, "rooms/" + roomId), {
+      board: board,
+      turn: nextTurn
     });
+
+  });
 
 });
 
-function makeMove(index,player){
 
-    board[index] = player;
 
-    cells[index].innerHTML = player;
+// ======================
+// UPDATE BOARD UI
+// ======================
 
-    cells[index].classList.add(
-        player === "KH" ? "kh" : "rk"
-    );
+function updateBoardUI() {
 
-    checkWinner();
+  cells.forEach((cell, index) => {
 
-    currentPlayer =
-        currentPlayer === "KH" ? "RK" : "KH";
+    cell.innerText = board[index];
 
-    if(gameActive){
-        statusText.innerHTML =
-            currentPlayer + " Turn";
-    }
-}
+    cell.classList.remove("kh");
+    cell.classList.remove("rk");
 
-function computerMove(){
-
-    let empty = [];
-
-    board.forEach((v,i)=>{
-        if(v === "") empty.push(i);
-    });
-
-    if(empty.length === 0) return;
-
-    let random =
-        empty[Math.floor(Math.random()*empty.length)];
-
-    makeMove(random,"RK");
-}
-
-function checkWinner(){
-
-    let winner = null;
-
-    winPatterns.forEach(pattern=>{
-
-        const [a,b,c] = pattern;
-
-        if(
-            board[a] &&
-            board[a] === board[b] &&
-            board[a] === board[c]
-        ){
-            winner = board[a];
-        }
-
-    });
-
-    if(winner){
-
-        gameActive = false;
-
-        statusText.innerHTML =
-            winner + " Wins";
-
-        if(winner === "KH"){
-            khScore++;
-            khScoreText.innerHTML = khScore;
-        }else{
-            rkScore++;
-            rkScoreText.innerHTML = rkScore;
-        }
-
-        return;
+    if(board[index] === "KH") {
+      cell.classList.add("kh");
     }
 
-    if(!board.includes("")){
-
-        gameActive = false;
-
-        drawScore++;
-
-        drawScoreText.innerHTML = drawScore;
-
-        statusText.innerHTML = "Draw";
+    if(board[index] === "RK") {
+      cell.classList.add("rk");
     }
+
+  });
+
+  statusText.innerText = currentPlayer + " Turn";
+
 }
 
-restartBtn.onclick = restartGame;
 
-function restartGame(){
 
-    board = ["","","","","","","","",""];
+// ======================
+// CHECK WINNER
+// ======================
 
-    gameActive = true;
+function checkWinner() {
 
-    currentPlayer = "KH";
+  for(let pattern of winPatterns) {
 
-    statusText.innerHTML = "KH Turn";
+    const [a, b, c] = pattern;
 
-    cells.forEach(cell=>{
+    if(
+      board[a] &&
+      board[a] === board[b] &&
+      board[a] === board[c]
+    ) {
+      return board[a];
+    }
 
-        cell.innerHTML = "";
+  }
 
-        cell.classList.remove("kh");
-        cell.classList.remove("rk");
+  if(!board.includes("")) {
+    return "DRAW";
+  }
 
-    });
+  return null;
 }
+
+
+
+// ======================
+// UPDATE SCORES
+// ======================
+
+function updateScores() {
+
+  khScoreEl.innerText = khWins;
+  rkScoreEl.innerText = rkWins;
+  drawScoreEl.innerText = draws;
+
+}
+
+
+
+// ======================
+// RESTART GAME
+// ======================
+
+restartBtn.onclick = () => {
+
+  if(roomId === "") return;
+
+  board = ["", "", "", "", "", "", "", "", ""];
+
+  update(ref(db, "rooms/" + roomId), {
+    board: board,
+    turn: "KH",
+    winner: ""
+  });
+
+};
+
+
+
+// ======================
+// INITIAL UI
+// ======================
+
+updateBoardUI();
