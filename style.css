@@ -1,203 +1,401 @@
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+    overflow-x:hidden;
+    font-family:Arial, sans-serif;
+    color:white;
 }
 
 body{
-  background:url("bg.png") center/cover no-repeat fixed;
-  min-height:100vh;
-  color:white;
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.45),
+            rgba(0,0,0,0.65)
+        ),
+        url("./bg.png");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+
+    padding:20px;
 }
 
-.app{
-  width:100%;
-  max-width:430px;
-  margin:auto;
-  padding:20px;
+.container{
+    width:100%;
+    max-width:430px;
+
+    backdrop-filter:blur(4px);
+
+    display:flex;
+    flex-direction:column;
+    gap:20px;
 }
 
-.top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
+/* ========================= */
+/* HEADER */
+/* ========================= */
+
+.top-section{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    position:relative;
 }
 
-.hero{
-  text-align:center;
+.player-side{
+    text-align:center;
 }
 
-.abbr{
-  font-size:70px;
-  font-weight:bold;
+.kh-text{
+    font-size:72px;
+    font-weight:bold;
+
+    color:#2d7dff;
+
+    text-shadow:
+        0 0 10px #2d7dff,
+        0 0 25px #2d7dff;
 }
 
-.khGlow{
-  color:#2b7fff;
-  text-shadow:0 0 20px #2b7fff;
+.rk-text{
+    font-size:72px;
+    font-weight:bold;
+
+    color:#ff7a00;
+
+    text-shadow:
+        0 0 10px #ff7a00,
+        0 0 25px #ff7a00;
 }
 
-.rkGlow{
-  color:#ff7a00;
-  text-shadow:0 0 20px #ff7a00;
+.player-name{
+    margin-top:8px;
+    font-size:18px;
 }
 
-.name{
-  font-size:14px;
+.vs-text{
+    font-size:64px;
+    font-weight:bold;
+
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
 }
 
-.versus{
-  font-size:55px;
-  font-weight:bold;
+/* ========================= */
+/* MODE BUTTONS */
+/* ========================= */
+
+.mode-buttons{
+    display:flex;
+    gap:12px;
 }
 
-.modes{
-  display:flex;
-  gap:10px;
-  margin-bottom:15px;
+.mode-buttons button{
+    flex:1;
+
+    height:60px;
+
+    border:none;
+    border-radius:20px;
+
+    background:#090909;
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    transition:0.3s;
 }
 
-.modeBtn{
-  flex:1;
-  height:55px;
-  border:none;
-  border-radius:18px;
-  background:#111;
-  color:white;
+.mode-buttons button.active{
+    background:
+        linear-gradient(
+            90deg,
+            #2d5cff,
+            #ff4fb3
+        );
+
+    box-shadow:
+        0 0 15px rgba(255,0,120,0.5);
 }
 
-.activeMode{
-  background:linear-gradient(90deg,#355dff,#ff4fa0);
+/* ========================= */
+/* ONLINE ROOM */
+/* ========================= */
+
+.online-controls{
+    display:flex;
+    gap:10px;
 }
 
-.onlineSection{
-  display:flex;
-  gap:10px;
-  margin-bottom:15px;
+.online-controls input{
+    flex:1;
+
+    height:60px;
+
+    border:none;
+    border-radius:18px;
+
+    background:#050505;
+    color:white;
+
+    padding:0 20px;
+
+    font-size:20px;
 }
 
-#roomInput{
-  flex:1;
-  height:50px;
-  border:none;
-  border-radius:15px;
-  padding:15px;
-  background:#111;
-  color:white;
+.online-controls button{
+    width:90px;
+
+    border:none;
+    border-radius:18px;
+
+    background:#0027a8;
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
 }
 
-#createRoomBtn,
-#joinRoomBtn{
-  width:75px;
-  border:none;
-  border-radius:15px;
-  background:#001d73;
-  color:white;
+/* ========================= */
+/* PLAYER SELECT */
+/* ========================= */
+
+.choose-side{
+    display:flex;
+    gap:15px;
 }
 
-.chooseSide{
-  display:flex;
-  gap:10px;
-  margin-bottom:20px;
+.choose-side button{
+    flex:1;
+
+    height:60px;
+
+    border:none;
+    border-radius:18px;
+
+    background:#050505;
+    color:white;
+
+    font-size:24px;
+
+    cursor:pointer;
 }
 
-.sideBtn{
-  flex:1;
-  height:55px;
-  border:none;
-  border-radius:15px;
-  background:#111;
-  color:white;
+.choose-side button.active{
+    background:
+        linear-gradient(
+            90deg,
+            #007bff,
+            #2ea7ff
+        );
 }
 
-.activeSide{
-  background:linear-gradient(90deg,#0077ff,#1fa2ff);
+/* ========================= */
+/* TURN */
+/* ========================= */
+
+.turn-box{
+    width:100%;
+    height:90px;
+
+    background:rgba(0,0,0,0.75);
+
+    border-radius:25px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:52px;
+    font-weight:bold;
 }
 
-.status{
-  height:75px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(0,0,0,.6);
-  border-radius:25px;
-  font-size:24px;
-  font-weight:bold;
-  margin-bottom:20px;
-}
+/* ========================= */
+/* BOARD */
+/* ========================= */
 
 .board{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:18px;
 }
 
-.cell{
-  aspect-ratio:1/1;
-  border-radius:25px;
-  background:rgba(0,0,0,.5);
-  border:2px solid rgba(255,255,255,.08);
+.tile{
+    aspect-ratio:1/1;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    border-radius:28px;
 
-  font-size:42px;
-  font-weight:bold;
+    background:
+        rgba(0,0,0,0.45);
+
+    border:
+        2px solid rgba(255,255,255,0.08);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:64px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    backdrop-filter:blur(5px);
+
+    transition:0.2s;
 }
 
-.khCell{
-  color:#2b7fff;
-  text-shadow:0 0 20px #2b7fff;
+.tile:hover{
+    transform:scale(1.03);
 }
 
-.rkCell{
-  color:#ff7a00;
-  text-shadow:0 0 20px #ff7a00;
+.tile.kh{
+    color:#2d7dff;
+
+    text-shadow:
+        0 0 12px #2d7dff;
 }
 
-.restartBtn{
-  width:100%;
-  height:75px;
-  border:none;
-  border-radius:25px;
-  margin-top:25px;
-  margin-bottom:25px;
+.tile.rk{
+    color:#ff7a00;
 
-  background:linear-gradient(90deg,#355dff,#ff2d8d);
-
-  color:white;
-  font-size:20px;
-  font-weight:bold;
+    text-shadow:
+        0 0 12px #ff7a00;
 }
 
-.scores{
-  display:flex;
-  gap:12px;
+/* ========================= */
+/* RESTART */
+/* ========================= */
+
+.restart-btn{
+    width:100%;
+    height:90px;
+
+    border:none;
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #4b5dff,
+            #ff3fa5
+        );
+
+    color:white;
+
+    font-size:28px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 25px rgba(255,0,120,0.4);
 }
 
-.scoreCard{
-  flex:1;
-  background:rgba(0,0,0,.55);
-  border-radius:25px;
-  padding:20px 10px;
-  text-align:center;
+/* ========================= */
+/* SCORE */
+/* ========================= */
+
+.scoreboard{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+
+    gap:14px;
+
+    margin-bottom:20px;
 }
 
-.scoreCard h2{
-  font-size:22px;
+.score-card{
+    background:
+        rgba(0,0,0,0.55);
+
+    border-radius:28px;
+
+    padding:20px 10px;
+
+    text-align:center;
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(5px);
 }
 
-.scoreCard p{
-  font-size:12px;
-  margin-top:8px;
+.score-title{
+    font-size:42px;
+    font-weight:bold;
 }
 
-.scoreCard span{
-  display:block;
-  margin-top:15px;
-  font-size:48px;
-  font-weight:bold;
+.score-sub{
+    font-size:16px;
+
+    margin-top:8px;
+    opacity:0.9;
+}
+
+.score-value{
+    font-size:72px;
+    font-weight:bold;
+
+    margin-top:15px;
+}
+
+.kh-score{
+    color:#2d7dff;
+}
+
+.rk-score{
+    color:#ff7a00;
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media(max-width:480px){
+
+    .kh-text,
+    .rk-text{
+        font-size:64px;
+    }
+
+    .vs-text{
+        font-size:48px;
+    }
+
+    .tile{
+        font-size:52px;
+    }
+
+    .turn-box{
+        font-size:42px;
+        height:80px;
+    }
+
+    .restart-btn{
+        height:80px;
+        font-size:24px;
+    }
+
 }
