@@ -1,3 +1,5 @@
+console.log("Game Running");
+
 const cells = document.querySelectorAll(".cell");
 
 const statusText = document.getElementById("status");
