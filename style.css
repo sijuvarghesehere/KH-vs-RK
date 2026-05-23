@@ -5,142 +5,249 @@
 }
 
 body{
-    font-family:Arial,sans-serif;
+    background:#000;
+    color:white;
+    font-family:Arial, Helvetica, sans-serif;
     min-height:100vh;
-    background:url("bg.png") center center/cover no-repeat;
     display:flex;
     justify-content:center;
-    align-items:center;
+    align-items:flex-start;
     overflow-x:hidden;
-    color:white;
-    position:relative;
+
+    background-image:url("bg.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
 }
 
-.overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.55);
+.app{
+    width:100%;
+    max-width:430px;
+
+    min-height:100vh;
+
+    padding:20px 16px 30px;
+
     backdrop-filter:blur(4px);
-}
-
-.game-container{
-    position:relative;
-    z-index:2;
-
-    width:min(92vw,480px);
-
-    padding:20px;
-    border-radius:32px;
 
     background:rgba(0,0,0,0.45);
-
-    backdrop-filter:blur(18px);
-
-    border:1px solid rgba(255,255,255,0.08);
-
-    margin:20px auto;
 }
 
-.logo-area{
+
+
+/* =========================
+TOP
+========================= */
+
+.top-section{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:18px;
+
+    margin-bottom:24px;
+}
+
+.player-side{
+    text-align:center;
+    width:120px;
 }
 
 .player-side h1{
-    font-size:68px;
-}
-
-.kh-side h1{
-    color:#3b82f6;
-    text-shadow:0 0 20px #3b82f6;
-}
-
-.rk-side h1{
-    color:#f97316;
-    text-shadow:0 0 20px #f97316;
+    font-size:72px;
+    font-weight:900;
 }
 
 .player-side p{
-    margin-top:8px;
-    font-size:18px;
+    margin-top:6px;
+    font-size:16px;
 }
 
-.center-logo h2{
-    font-size:48px;
+.kh-side h1{
+    color:#2979ff;
+    text-shadow:0 0 20px #2979ff;
 }
 
-.mode-select{
+.rk-side h1{
+    color:#ff6a00;
+    text-shadow:0 0 20px #ff6a00;
+}
+
+.vs-text{
+    font-size:54px;
+    font-weight:900;
+}
+
+
+
+/* =========================
+MODE BUTTONS
+========================= */
+
+.mode-buttons{
     display:flex;
     gap:10px;
+
     margin-bottom:18px;
 }
 
-.mode-select button{
+.mode-btn{
     flex:1;
-    padding:12px;
+
+    height:54px;
+
     border:none;
-    border-radius:14px;
-    background:rgba(255,255,255,0.08);
+    border-radius:18px;
+
     color:white;
-    font-size:14px;
+
+    background:rgba(255,255,255,0.08);
+
+    font-size:16px;
     cursor:pointer;
 }
 
-.mode-select button.active{
-    background:linear-gradient(90deg,#2563eb,#ec4899);
+.active-mode{
+    background:linear-gradient(135deg,#3b5cff,#ff4da6);
+
+    box-shadow:0 0 20px rgba(255,0,150,0.35);
 }
+
+
+
+/* =========================
+ONLINE
+========================= */
 
 .online-controls{
     display:flex;
-    gap:8px;
+    gap:10px;
+
     margin-bottom:18px;
 }
 
 .online-controls input{
     flex:1;
-    padding:12px;
+
+    height:52px;
+
     border:none;
-    border-radius:12px;
+    outline:none;
+
+    border-radius:16px;
+
     background:rgba(255,255,255,0.08);
+
+    padding:0 16px;
+
     color:white;
+
+    font-size:16px;
 }
 
 .online-controls button{
-    padding:12px 16px;
+    width:84px;
+
     border:none;
-    border-radius:12px;
-    background:#111827;
+
+    border-radius:16px;
+
     color:white;
+
+    background:#081d52;
+
+    font-size:16px;
+
+    cursor:pointer;
 }
 
-.status{
+
+
+/* =========================
+PLAYER SELECT
+========================= */
+
+.player-select{
+    display:flex;
+
+    gap:10px;
+
     margin-bottom:20px;
-
-    text-align:center;
-
-    padding:18px;
-
-    border-radius:18px;
-
-    background:rgba(0,0,0,0.45);
-
-    font-size:32px;
-    font-weight:bold;
 }
+
+.choose-btn{
+    flex:1;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:16px;
+
+    color:white;
+
+    font-size:16px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    background:rgba(255,255,255,0.08);
+}
+
+.kh-btn.active-role{
+    background:linear-gradient(135deg,#0066ff,#00aeff);
+
+    box-shadow:0 0 18px rgba(0,100,255,0.5);
+}
+
+.rk-btn.active-role{
+    background:linear-gradient(135deg,#ff6600,#ff2200);
+
+    box-shadow:0 0 18px rgba(255,80,0,0.5);
+}
+
+
+
+/* =========================
+TURN
+========================= */
+
+.turn-box{
+    height:70px;
+
+    border-radius:22px;
+
+    background:rgba(0,0,0,0.5);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin-bottom:26px;
+}
+
+#turnText{
+    font-size:28px;
+    font-weight:900;
+}
+
+
+
+/* =========================
+BOARD
+========================= */
 
 .board{
     display:grid;
+
     grid-template-columns:repeat(3,1fr);
 
     gap:14px;
 
-    margin-bottom:24px;
+    margin-bottom:30px;
 }
 
 .cell{
-    aspect-ratio:1;
+    aspect-ratio:1/1;
 
     border-radius:24px;
 
@@ -152,111 +259,130 @@ body{
     justify-content:center;
     align-items:center;
 
-    font-size:58px;
+    font-size:54px;
+    font-weight:900;
 
     cursor:pointer;
 
-    backdrop-filter:blur(8px);
-
-    transition:0.2s;
-}
-
-.cell:hover{
-    transform:scale(1.03);
+    backdrop-filter:blur(5px);
 }
 
 .cell.kh{
-    color:#3b82f6;
-    text-shadow:0 0 20px #3b82f6;
+    color:#2979ff;
+
+    text-shadow:0 0 18px #2979ff;
 }
 
 .cell.rk{
-    color:#f97316;
-    text-shadow:0 0 20px #f97316;
+    color:#ff6a00;
+
+    text-shadow:0 0 18px #ff6a00;
 }
+
+
+
+/* =========================
+RESTART
+========================= */
 
 .restart-btn{
     width:100%;
 
-    padding:20px;
+    height:74px;
 
     border:none;
 
-    border-radius:22px;
+    border-radius:30px;
 
-    font-size:28px;
-    font-weight:bold;
+    background:linear-gradient(135deg,#3b5cff,#ff2d96);
 
     color:white;
 
+    font-size:22px;
+    font-weight:900;
+
+    margin-bottom:28px;
+
     cursor:pointer;
 
-    margin-bottom:24px;
-
-    background:linear-gradient(90deg,#4f46e5,#ec4899);
-
-    box-shadow:0 0 30px rgba(236,72,153,0.45);
+    box-shadow:0 0 25px rgba(255,0,120,0.45);
 }
 
-.scoreboard{
+
+
+/* =========================
+SCORE
+========================= */
+
+.score-board{
     display:grid;
+
     grid-template-columns:repeat(3,1fr);
 
-    gap:14px;
+    gap:12px;
 }
 
 .score-card{
-    padding:22px 10px;
-
-    text-align:center;
-
-    border-radius:24px;
-
     background:rgba(0,0,0,0.45);
 
     border:1px solid rgba(255,255,255,0.08);
+
+    border-radius:26px;
+
+    padding:18px 10px;
+
+    text-align:center;
+
+    backdrop-filter:blur(4px);
 }
 
 .score-card h2{
-    font-size:42px;
+    font-size:22px;
+
     margin-bottom:10px;
 }
 
+.score-card p{
+    font-size:14px;
+
+    margin-bottom:16px;
+
+    opacity:0.85;
+}
+
 .score-card span{
-    display:block;
-    margin-top:16px;
     font-size:52px;
-    font-weight:bold;
+
+    font-weight:900;
 }
 
-.kh-card h2{
-    color:#3b82f6;
+.score-card:nth-child(1) h2{
+    color:#2979ff;
 }
 
-.rk-card h2{
-    color:#f97316;
+.score-card:nth-child(3) h2{
+    color:#ff6a00;
 }
 
-@media(max-width:480px){
+
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:430px){
 
     .player-side h1{
-        font-size:54px;
+        font-size:64px;
     }
 
-    .center-logo h2{
-        font-size:40px;
-    }
-
-    .status{
-        font-size:24px;
-    }
-
-    .cell{
-        font-size:48px;
+    .vs-text{
+        font-size:44px;
     }
 
     .restart-btn{
-        font-size:22px;
+        height:68px;
+        font-size:20px;
     }
 
 }
